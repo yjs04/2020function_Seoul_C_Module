@@ -1929,3 +1929,22 @@ footer{
 }
 
 .entry_img_box > img{width:100%;min-height:100%;}
+
+.context-menu{
+    position: absolute;
+    border: 1px solid #ddd;
+    border-radius: 0.1em;
+    background-color: #fff;
+    box-shadow: 5px 5px 20px #ddd;
+}
+
+.context-menu-item{
+    padding: 10px 50px;
+    border-bottom: 1px solid #ddd;
+    transition: .3s;
+    text-align: center;
+}
+
+.context-menu-item:last-child{border: none;}
+
+.context-menu-item:hover{opacity: 0.7;}

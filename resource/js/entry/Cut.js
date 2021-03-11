@@ -37,18 +37,18 @@ class Cut extends Tool{
         this.ctx.lineTo(x,y);
         this.ctx.stroke();
 
-        this.sctx.linTo(x,y);
+        this.sctx.lineTo(x,y);
         this.sctx.stroke();
     }
 
     oncontextmenu(makeFunc){
         makeFunc([
             {name:"자르기",onclick:this.accept},
-            {name:"최소",onclick:this.cancel}
+            {name:"취소",onclick:this.cancel}
         ]);
     }
 
-    accpet = e=>{
+    accept = e=>{
         let target = this.selected;
         let src = target.src;
         let slicedSrc = new Source(this.ctx.getImageData(0,0,this.ws.width,this.ws.height));
@@ -115,7 +115,7 @@ class Cut extends Tool{
     }
 
     cancel = e=>{
-        this.ctx.clearRect(0,0,this.ws.width.this.ws.height);
+        this.ctx.clearRect(0,0,this.ws.width,this.ws.height);
         this.sctx.clearRect(0,0,this.ws.width, this.ws.height);
         this.unselectAll();
     }
