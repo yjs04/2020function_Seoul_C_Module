@@ -27,17 +27,17 @@ class Workspace{
 
     pushPart({image, width_size, height_size}){
         let imageObj = new Image();
+        width_size = width_size.replace(/px/g,"");
+        height_size = height_size.replace(/px/g,"");
         imageObj.src = "resource/image/"+image;
-        console.log(imageObj);
-        imageObj.onlad = () =>{
+        imageObj.onload = () =>{
             let canvas = document.createElement("canvas");
             canvas.width = width_size;
             canvas.height = height_size;
             let ctx = canvas.getContext("2d");
             ctx.drawImage(imageObj, 0, 0, width_size,height_size);
             let src = new Source(ctx.getImageData(0,0,width_size,height_size));
-            this.parts.push(new this.parts(src));
-            console.log(this.parts);
+            this.parts.push(new Part(src));
         }
     }
 

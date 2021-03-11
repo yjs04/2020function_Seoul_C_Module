@@ -108,7 +108,7 @@ class Entry{
         $("#entry_modal").on("click",".entry_img_item",async e =>{
             let idx = e.currentTarget.dataset.id;
             let list = await JSON.parse(localStorage.getItem("inventory"));
-            console.log(list,idx);
+            let item = list[idx];
             list[idx].num--;
             if(list[idx].num == 0){
                 list.splice(idx,1);
@@ -116,7 +116,7 @@ class Entry{
             }
             localStorage.setItem("inventory",JSON.stringify(list));
 
-            this.ws.pushPart(list[idx]);
+            this.ws.pushPart(item);
 
             $("#entry_modal").modal("hide");
         });
