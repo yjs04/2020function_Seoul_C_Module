@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전주한지문화축제</title>
+    <link rel="stylesheet" href="resource/bootstrap-4.3.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="resource/fontawesome-free-5.1.0-web/css/all.css">
+    <link rel="stylesheet" href="resource/css/style.css">
+
+    <script src="resource/js/jquery-3.4.1.min.js"></script>
+    <script src="resource/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <!-- header -->
+        <header>
+            <!-- logo -->
+            <div id="logo">
+                <a href="index.html"><img src="resource/image/logo.png" alt="logo"></a>
+            </div>
+            <!-- nav -->
+            <input type="radio" class="not_pc" hidden name="nav_open" id="nav_close" checked>
+            <input type="radio" class="not_pc" hidden name="nav_open" id="nav_open">
+            <label for="nav_open" class="not_pc" id="nav_open_label"><i class="fas fa-bars"></i></label>
+            <label for="nav_close" class="not_pc" id="nav_close_label"></label>
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index.html">전주한지문화축제</a>
+                        <ul class="sub_menu">
+                            <li><a href="sub1.html">개요/연혁</a></li>
+                            <li><a href="sub2.html">찾아오시는길</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">한지상품판매관</a>
+                        <ul class="sub_menu">
+                            <li><a href="#">한지업체</a></li>
+                            <li><a href="store.html">온라인스토어</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">한지공예대전</a>
+                        <ul class="sub_menu">
+                            <li><a href="entry.html">출품신청</a></li>
+                            <li><a href="#">참가작품</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">축제공지사항</a>
+                        <ul class="sub_menu">
+                            <li><a href="#">알려드립니다</a></li>
+                            <li><a href="#">1:1문의</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- user -->
+            <div id="user">
+                <a href="#" class="user_btn">로그인</a>
+                <a href="join.html" class="user_btn">회원가입</a>
+            </div>
+            <div class="sub_menu_bc"></div>
+        </header>
+        <!-- visual -->
+        <div id="visual" class="subpage">
+            <img src="resource/image/sub2.gif" alt="sub1_visual">
+        </div>
+        <!-- content -->
+        <div id="content">
+            <div class="sub_title_wrap container">
+                <h5><a href="index.html">한지상품판매관</a> <i class="fas fa-angle-right"></i> <a href="store.html">온라인스토어</a></h5>
+                <h2>온라인스토어</h2>
+            </div>
+            <div class="content_wrap container">
+                <div class="content_title">
+                    <h2 class="border-blue text-blue">구매 리스트</h2>
+                </div>
+                <div class="content_box">
+                    <div id="basket_area">
+                        <table id="basket_table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">상품 정보</th>
+                                    <th>수량</th>
+                                    <th>합계 포인트</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="basket_list">
+                            </tbody>
+                        </table>
+                        <div id="basket_footer" class="bc-blue">
+                            <p id="basket_sum" class="text-white">총 합계 <span id="basket_sum_num" class="text-white">0</span>p</p>
+                            <button id="basket_btn" class="btn bc-blue text-white py-2 px-3 rounded-0 border-white">구매 완료</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content_wrap container" id="store_item">
+                <div class="content_title" id="item_list_header">
+                    <h2 class="border-blue text-blue">상품 리스트</h2>
+                    <div id="search" class="hash">
+                        <div id="search_input" class="hash_input">
+                            <input type="text" id="search_word" class="hash_word" placeholder="자유롭게 입력해주세요.">
+                            <span>#</span>
+                        </div>
+                        <div id="search_value" class="hash_value"></div>
+                        <div id="search_errorMsg" class="hash_errorMsg"></div>
+                        <div id="search_hash_box" class="auto_hash_box"></div>
+                    </div>
+                </div>
+                <div class="content_box" id="item_area">
+                </div>
+                <button id="goods_btn" class="btn rounded-0" data-toggle="modal" data-target="#goods_popup">상품등록</button>
+            </div>
+
+            <div id="goods_popup" class="modal fade" tabindex="1">
+                <div class="modal-dialog popup overflow-hidden">
+                    <div class="modal-content rounded-0 border-0">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title">상품등록</h5>
+                            <button class="close" id="goods_close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="goods_form">
+                                <div class="form-group">
+                                    <label for="goods-img" class="form-label">이미지</label>
+                                    <input type="file" id="goods-img" name="goods-img" class="form-control" required accept="image/*">
+                                    <p class="form-text pl-2 text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="goods-name" class="form-label">이름</label>
+                                    <input type="text" id="goods-name" name="goods-name" class="form-control" required value="AAA">
+                                    <p class="form-text pl-2 text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="goods-company" class="form-label">업체명</label>
+                                    <input type="text" id="goods-company" name="goods-company" class="form-control" required value="AAA">
+                                    <p class="form-text pl-2 text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="goods-width" class="form-label">가로 사이즈</label>
+                                    <input type="number" id="goods-width" name="goods-width" min="100" max="1000" class="form-control" required value="100">
+                                    <p class="form-text pl-2 text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="goods-height" class="form-label">세로 사이즈</label>
+                                    <input type="number" id="goods-height" name="goods-height" min="100" max="1000" class="form-control" required value="100">
+                                    <p class="form-text pl-2 text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="goods-point" class="form-label">포인트</label>
+                                    <input type="number" id="goods-point" step="10" min="10" max="1000" name="goods-point" class="form-control" required value="100">
+                                    <p class="form-text pl-2 text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="goods_word" class="form-label">해시태그</label>
+                                    <div id="goods-tags" class="hash m-0">
+                                        <div id="goods_input" class="hash_input">
+                                            <input type="text" id="goods_word" class="hash_word" placeholder="자유롭게 입력해주세요.">
+                                            <span>#</span>
+                                        </div>
+                                        <div id="goods_value" class="hash_value"></div>
+                                        <div id="goods_errorMsg" class="hash_errorMsg"></div>
+                                        <div id="goods_hash_box" class="auto_hash_box"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer border-0 rounded-0 p-0">
+                            <button class="btn rounded-0 text-white w-100 p-2 bc-blue" id="goods_add_btn">추가완료</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script type="module" src="resource/js/tag.js"></script>
+            <script type="module" src="resource/js/store.js"></script>
+        </div>
+        <!-- footer -->
+        <footer>
+            <div id="footer_top">
+                <div id="footer_logo">
+                    <a href="index.html"><img src="resource/image/logo_footer.png" alt="footer-logo"></a>
+                </div>
+                <div id="footer_nav">
+                    <ul>
+                        <li>
+                            <a href="index.html">전주한지문화축제</a>
+                            <ul class="footer_sub_nav">
+                                <li><a href="sub1.html">개요/연혁</a></li>
+                                <li><a href="sub2.html">찾아오시는길</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">한지상품판매관</a>
+                            <ul class="footer_sub_nav">
+                                <li><a href="#">한지업체</a></li>
+                                <li><a href="store.html">온라인 스토어</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">한지공예대전</a>
+                            <ul class="footer_sub_nav">
+                                <li><a href="entry.html">출품신청</a></li>
+                                <li><a href="#">참가작품</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">축제공지사항</a>
+                            <ul class="footer_sub_nav">
+                                <li><a href="#">알려드립니다</a></li>
+                                <li><a href="#">1:1문의</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div id="sns">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+            <div id="copyright">Copyright 2018 jhanji. All Right Reserved.</div>
+        </footer>
+    </div>
+</body>
+</html>
