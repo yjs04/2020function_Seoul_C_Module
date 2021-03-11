@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전주한지문화축제</title>
+    <link rel="stylesheet" href="resource/bootstrap-4.3.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="resource/fontawesome-free-5.1.0-web/css/all.css">
+    <link rel="stylesheet" href="resource/css/style.css">
+
+    <script src="resource/js/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <!-- header -->
+        <header>
+            <!-- logo -->
+            <div id="logo">
+                <a href="index.html"><img src="resource/image/logo.png" alt="logo"></a>
+            </div>
+            <!-- nav -->
+            <input type="radio" class="not_pc" hidden name="nav_open" id="nav_close" checked>
+            <input type="radio" class="not_pc" hidden name="nav_open" id="nav_open">
+            <label for="nav_open" class="not_pc" id="nav_open_label"><i class="fas fa-bars"></i></label>
+            <label for="nav_close" class="not_pc" id="nav_close_label"></label>
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index.html">전주한지문화축제</a>
+                        <ul class="sub_menu">
+                            <li><a href="sub1.html">개요/연혁</a></li>
+                            <li><a href="sub2.html">찾아오시는길</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">한지상품판매관</a>
+                        <ul class="sub_menu">
+                            <li><a href="#">한지업체</a></li>
+                            <li><a href="store.html">온라인스토어</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">한지공예대전</a>
+                        <ul class="sub_menu">
+                            <li><a href="entry.html">출품신청</a></li>
+                            <li><a href="#">참가작품</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">축제공지사항</a>
+                        <ul class="sub_menu">
+                            <li><a href="#">알려드립니다</a></li>
+                            <li><a href="#">1:1문의</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- user -->
+            <div id="user">
+                <a href="#" class="user_btn">로그인</a>
+                <a href="join.html" class="user_btn">회원가입</a>
+            </div>
+            <div class="sub_menu_bc"></div>
+        </header>
+        <!-- visual -->
+        <div id="visual" class="subpage">
+            <img src="resource/image/sub2.gif" alt="sub1_visual">
+        </div>
+        <!-- content -->
+        <div id="content">
+            <div class="sub_title_wrap container">
+                <h5><a href="index.html">전주한지문화축제</a> <i class="fas fa-angle-right"></i> <a href="join.html">회원가입</a></h5>
+                <h2>회원가입</h2>
+            </div>
+            
+            <div id="join" class="content_wrap container mt-0">
+                <div class="content_box">
+                    <form id="join-form" method="post" action="/join" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="join-email" class="form-label">이메일</label>
+                            <input type="email" id="join-email" name="join-email" class="form-control" required>
+                            <p class="form-text text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="join-password" class="form-label">비밀번호</label>
+                            <input type="password" id="join-password" name="join-password" class="form-control" required>
+                            <p class="form-text text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="join-password-ck" class="form-label">비밀번호 확인</label>
+                            <input type="password" id="join-password-ck" name="join-password-ck" class="form-control" required>
+                            <p class="form-text text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="join-name" class="form-label">이름</label>
+                            <input type="text" id="join-name" name="join-name" class="form-control" required>
+                            <p class="form-text text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="join-photo" class="form-label">프로필 사진</label>
+                            <input type="file" id="join-photo" name="join-photo" class="form-control" required>
+                            <p class="form-text text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="join-type" class="form-label">회원 유형</label>
+                            <div class="form-radio-box">
+                                <div class="form-check">
+                                    <input type="radio" id="join-type-normal" name="join-type" class="form-check-input" required>
+                                    <label for="join-type-normal">일반</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" id="join-type-company" name="join-type" class="form-check-input" required>
+                                    <label for="join-type-company">기업</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-btn-box">
+                            <button id="join-btn" class="btn bc-blue text-white rounded-0">회원가입</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <script src="resource/js/join.js"></script>
+        </div>
+        <!-- footer -->
+        <footer>
+            <div id="footer_top">
+                <div id="footer_logo">
+                    <a href="index.html"><img src="resource/image/logo_footer.png" alt="footer-logo"></a>
+                </div>
+                <div id="footer_nav">
+                    <ul>
+                        <li>
+                            <a href="index.html">전주한지문화축제</a>
+                            <ul class="footer_sub_nav">
+                                <li><a href="sub1.html">개요/연혁</a></li>
+                                <li><a href="sub2.html">찾아오시는길</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">한지상품판매관</a>
+                            <ul class="footer_sub_nav">
+                                <li><a href="#">한지업체</a></li>
+                                <li><a href="store.html">온라인 스토어</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">한지공예대전</a>
+                            <ul class="footer_sub_nav">
+                                <li><a href="entry.html">출품신청</a></li>
+                                <li><a href="#">참가작품</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">축제공지사항</a>
+                            <ul class="footer_sub_nav">
+                                <li><a href="#">알려드립니다</a></li>
+                                <li><a href="#">1:1문의</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div id="sns">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+            <div id="copyright">Copyright 2018 jhanji. All Right Reserved.</div>
+        </footer>
+    </div>
+</body>
+</html>
