@@ -201,10 +201,15 @@ nav > ul > li >a:hover{color: #aaa;}
     align-content: space-around;
 }
 
+#user > span{
+    width: 120px;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 13px;
+    font-weight: bold;    
+}
+
 .user_btn{
     width: 70px;
-    border: none;
-    border-radius: 10px;
     transition: 0.3s all;
     background-color: rgba(0, 0, 0, 0);
     font-size: 13px;
@@ -1571,6 +1576,7 @@ footer{
 .item{
     position: relative;
     width: 280px;
+    height:425px;
     margin: 30px;
     padding: 10px;
     border: 5px dashed #ddd;

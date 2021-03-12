@@ -56,13 +56,12 @@ export default class Tag{
                 flag = !(val.length > 0 && this.taging_list.length > 9) && !(this.taging_list.find(x=>x==val)) && !(val.length < 2);
 
                 if((e.keyCode === 9 || e.keyCode === 13 || e.keyCode === 32) && flag){
-                    this.hash_make(val);
+                    this.hash_make(val,this.taging_list.length);
                     e.target.value = "";
                 }else{
                     this.auto_tag_list = [];
                     this.hash_list.forEach(x=>{if(x.indexOf(val) === 0 && this.auto_tag_list.findIndex(item => item === x) === -1 && val.length > 0) this.auto_tag_list.push(x);});
                     this.auto_hash_make(this.auto_tag_list);
-                    console.log(this.hash_list);
                 }
             }
             
@@ -85,7 +84,6 @@ export default class Tag{
                     if(flag) list.push(x);
                 });
             }else list = this.item_list;
-    
             this.module.setItemList(list);
         }else this.module.taging_list = this.taging_list;
     }
@@ -101,9 +99,9 @@ export default class Tag{
         }
     }
 
-    hash_make(val){
+    hash_make(val,id){
         let dom = document.createElement("div");
-        dom.innerHTML = `<span class="hash_result"># ${val}<button class="hash_result_del" data-id="${this.taging_list.length}"><i class="fas fa-times"></i></button></span>`;
+        dom.innerHTML = `<span class="hash_result"># ${val}<button class="hash_result_del" data-id="${id}"><i class="fas fa-times"></i></button></span>`;
         dom.querySelector(".hash_result_del").addEventListener("click",this.hash_del);
         this.hash_result_box.appendChild(dom.firstChild);
         this.taging_list.push(val);
@@ -111,10 +109,12 @@ export default class Tag{
     }
 
     hash_del=e=>{
-        let target = e.target.parentNode;
         let idx = e.target.dataset.id;
-        this.hash_result_box.removeChild(target);
         this.taging_list.splice(idx,1);
+        let list = JSON.parse(JSON.stringify(this.taging_list));
+        this.hash_result_box.innerHTML = "";
+        this.taging_list = [];
+        if(list.length)list.forEach((x,idx)=>{this.hash_make(x,idx)});
         this.item_set();
     }
 }

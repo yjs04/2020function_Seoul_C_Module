@@ -1,7 +1,7 @@
 import tag from './tag.js';
 class Store{
     constructor(){
-        this.itemList = localStorage.getItem('itemList') === null ? [] : JSON.parse(localStorage.getItem('itemList'));
+        this.itemList = [];
         this.itemArea = document.querySelector("#item_area");
         this.tag_list = [];
         this.tag = null;
@@ -10,8 +10,9 @@ class Store{
         this.goods_add = false;
         this.basketList = [];
         this.basketArea = document.querySelector("#basket_list");
+        this.user = null;
 
-        fetch("resource/js/papers.json")
+        fetch("/storePapers")
         .then(res => res.json())
         .then(data => this.setting(data))
     }
@@ -49,53 +50,54 @@ class Store{
         document.querySelectorAll("#goods_form > .form-group > input").forEach(x=>{$(x).on("propertychange change keyup input",e=>{this.goodsInput(e.target)})});
     }
 
-    setting(data){
+    async setting(data){
+        this.user = await fetch('/userInfo/admin').then(res=>res.json());
         // itemList
-        if(!this.itemList.length){
-            data.forEach(x=>{
-                x.point_num = parseInt(x.point.replace(/p/g,""));
-                x.point_num = parseInt(x.point.replace(/,/g,""));
-                x.hash_tags.forEach(item=>{if(this.tag_list.find(tag => tag === item) === undefined) this.tag_list.push(item.replace(/#/g,""));})
-                x.height_num = parseInt(x.height_size.replace(/px/g,""));
-                x.width_num = parseInt(x.width_size.replace(/px/g,""));
-                x.num = 0;
-                this.itemList.push(x);
-            });
-            localStorage.setItem('itemList',JSON.stringify(this.itemList));
-        }
+        data.forEach(x=>{
+            x.point_num = parseInt(x.point.replace(/p/g,""));
+            x.point_num = parseInt(x.point.replace(/,/g,""));
+            x.hash_tags = JSON.parse(x.hash_tags);
+            x.hash_tags.forEach(item=>{if(this.tag_list.find(tag => tag === item) === undefined) this.tag_list.push(item.replace(/#/g,""));})
+            x.height_num = parseInt(x.height_size.replace(/px/g,""));
+            x.width_num = parseInt(x.width_size.replace(/px/g,""));
+            x.num = 0;
+            this.itemList.push(x);
+        });
+
+        localStorage.setItem('itemList',JSON.stringify(this.itemList));
 
         this.setList();
     }
 
     get goodsImg(){
-        let img = $("#goods-img")[0].files;
+        let img = $("#image")[0].files;
         img = img.length > 0 ? img[0] : "";
         return img;
     }
 
-    get goodsName(){return $("#goods-name").val();}
-    get goodsCompany(){return $("#goods-company").val();}
+    get goodsName(){return $("#paper_name").val();}
+    get goodsCompany(){return $("#company_name").val();}
     get goodsWidth(){
-        let width = $("#goods-width").val();
+        let width = $("#width_size").val();
         width = width === "" ? width : parseInt(width);
         width = width === "" ? width : isNaN(width) ? 10 : width < 100 ? 100 : width > 1000 ? 1000 : width;
-        $("#goods-width").val(width);
+        $("#width_size").val(width);
         return width;
     }
     
     get goodsHeight(){
-        let height = $("#goods-height").val();
+        let height = $("#height_size").val();
         height = height === "" ? height : parseInt(height);
         height = height === "" ? height : isNaN(height) ? 10 : height < 100 ? 100 : height > 1000 ? 1000 : height;
-        $("#goods-height").val(height);
+        $("#height_size").val(height);
         return height;
     }
 
     get goodsPoint(){
-        let point = $("#goods-point").val();
+        let point = $("#point").val();
         point = point === "" ? point : parseInt(point);
         point = point === "" ? point : isNaN(point) ? 10 : point < 10 ? 10 : point > 1000 ? 1000 : (Math.round(point/10) * 10);
-        $("#goods-point").val(point);
+        $("#point").val(point);
         return point;
     }
 
@@ -103,22 +105,23 @@ class Store{
         let id = "#"+target.id;
         let val = null;
 
-        if(id === "#goods-img"){
+        if(id === "#image"){
             val = this.goodsImg;
+            let exp = val.name.split(".")[1].toLowerCase();
             if(val === "") this.goodsCheck(true,id,"이미지를 선택해주세요.");
-            else if(!(val.name.split(".")[1] === "jpg" || val.name.split(".")[1] === "png" || val.name.split(".")[1] === "gif")) this.goodsCheck(true,id,"jpg, png, gif 이미지 파일만 입력할 수 있습니다.");
+            else if(!(exp === "jpg" || exp === "png" || exp === "gif")) this.goodsCheck(true,id,"jpg, png, gif 이미지 파일만 입력할 수 있습니다.");
             else if(val.size >= 1024 * 1024 * 5) this.goodsCheck(true,id,"이미지는 5MB를 넘을 수 없습니다.");
             else this.goodsCheck(false,id);
         }
 
-        if(id === "#goods-name") this.goodsCheck(this.goodsName === "",id,"이름을 입력해주세요.");
-        if(id === "#goods-company") this.goodsCheck(this.goodsCompany === "",id,"업체명을 입력해주세요.");
-        if(id === "#goods-width") this.goodsCheck(this.goodsWidth === "",id,"가로 사이즈를 입력해주세요.");
-        if(id === "#goods-height") this.goodsCheck(this.goodsHeight === "",id,"세로 사이즈를 입력해주세요.");
-        if(id === "#goods-point") this.goodsCheck(this.goodsPoint === "",id,"포인트를 입력해주세요.");
+        if(id === "#paper_name") this.goodsCheck(this.goodsName === "",id,"이름을 입력해주세요.");
+        if(id === "#company_name") this.goodsCheck(this.goodsCompany === "",id,"업체명을 입력해주세요.");
+        if(id === "#width_size") this.goodsCheck(this.goodsWidth === "",id,"가로 사이즈를 입력해주세요.");
+        if(id === "#height_size") this.goodsCheck(this.goodsHeight === "",id,"세로 사이즈를 입력해주세요.");
+        if(id === "#point") this.goodsCheck(this.goodsPoint === "",id,"포인트를 입력해주세요.");
     }
 
-    async goodsAdd(){
+     goodsAdd(){
         this.goods_add = true;
         document.querySelectorAll("#goods_form > .form-group > input").forEach(item =>{this.goodsInput(item)});
         if(!this.taging_list.length){
@@ -128,34 +131,12 @@ class Store{
         
         if(this.goods_add){
             let tag = [];
-            await this.taging_list.forEach(x=>{tag.push("#"+x);});
-            
-            let item = {
-                id:this.itemList.length,
-                image:this.goodsImg.name,
-                height_num:this.goodsHeight,
-                height_size:this.goodsHeight+"px",
-                hash_tags:tag,
-                num:0,
-                paper_name:this.goodsName,
-                point:this.goodsPoint+"p",
-                point_num:this.goodsPoint,
-                width_num:this.goodsWidth,
-                width_size:this.goodsWidth+"px",
-                company_name:this.goodsCompany
-            }
+            this.taging_list.forEach(x=>{tag.push("#"+x);});
+            tag = JSON.stringify(tag);
+            document.querySelector("#hash_tags").value = tag;
 
-            this.itemList.push(item);
-            localStorage.setItem('itemList',JSON.stringify(this.itemList));
-            this.setList();
-            alert("한지가 추가되었습니다.");
+            document.querySelector("#goods_form").submit();
             
-            document.querySelectorAll("#goods_form > .form-group > input").forEach(item =>{item.value = "";});
-            document.querySelector("#goods_value").innerHTML = "";
-            document.querySelector("#goods_word").value = "";
-            this.taging_list = [];
-            
-            $("#goods_close").click();
         }
     }
 
@@ -214,11 +195,11 @@ class Store{
     basketAdd=e=>{
         let id = e.target.dataset.id;
         let item = this.itemList[id];
-        let flag = this.basketList.findIndex(x=>x.id == id);
+        let flag = this.basketList.findIndex(x=>x.id-1 == parseInt(id));
 
         item.num++;
         item.sum = item.num * item.point_num;
-        console.log(flag);
+
         if(flag !== -1){
             this.basketList[flag].num++;
             this.basketList[flag].sum = item.sum;
@@ -227,7 +208,7 @@ class Store{
             item.idx = this.basketList.length;
             this.basketList.push(item);
         }
-
+        
         e.target.innerHTML = `추가하기(${item.num}개)`;
         this.setBasket();
     }
@@ -235,8 +216,8 @@ class Store{
     basketDel=e=>{
         let idx = e.target.dataset.idx;
         let id = this.basketList[idx].id;
-        this.basketList.splice(idx-1,1);
-        this.itemList[id].num = 0;
+        this.basketList.splice(idx,1);
+        this.itemList[id-1].num = 0;
         document.querySelector("#item-"+id+" .basketAddBtn").innerHTML="구매하기";
         this.setBasket();
     }
@@ -246,7 +227,8 @@ class Store{
         this.basketArea.innerHTML = "";
 
         if(this.basketList.length){
-            this.basketList.forEach(x=>{
+            this.basketList.forEach((x,idx)=>{
+                x.idx = idx;
                 sum += x.sum;
                 let item = this.makeBasket(x);
                 this.basketArea.appendChild(item);
@@ -259,7 +241,7 @@ class Store{
         let dom = document.createElement("tr");
         dom.innerHTML = `<tr>
                             <td class="basket_info_area">
-                                <img src="resource/image/${image}" alt="basket_img" class="basket_img">
+                                <img src="uploads/${image}" alt="basket_img" class="basket_img">
                                 <div class="basket_info">
                                     <h5>${paper_name}</h5>
                                     <p>${company_name}</p>
@@ -289,13 +271,13 @@ class Store{
         this.setBasket();
     }
 
-    makeItem({id,image,paper_name,company_name,point,width_num,height_num,hash_tags,num}){
+    makeItem({id,image,paper_name,company_name,point,width_num,height_num,hash_tags,num,company_id}){
         let btn = num > 0 ? `추가하기(${num}개)` : "구매하기";
         let dom = document.createElement("div");
         dom.classList.add("item");
         dom.setAttribute("id",`item-${id}`);
         dom.innerHTML = `<div class="item-photo">
-                            <img src="resource/image/${image}" alt="item-photo">
+                            <img src="uploads/${image}" alt="item-photo">
                             <p class="item-size">${width_num} X ${height_num}</p>
                         </div>
                         <div class="item-info pt-3">
@@ -303,11 +285,11 @@ class Store{
                             <p class="text-muted mb-0">${company_name}</p>
                             <div class="item-hash-tag mt-3">`;
         hash_tags.forEach(x=>{dom.querySelector(".item-hash-tag").innerHTML += `<p class="text-muted">${x}</p>`;});
-        dom.innerHTML +=`</div>
-                            <button class="basketAddBtn btn bc-blue text-white rounded-0 mt-2 float-right w-100" data-id="${id}">${btn}</button>
-                        </div>`;
+        dom.innerHTML +=`</div>`;
+        if(this.user.id !== company_id) dom.innerHTML += `<button class="basketAddBtn btn bc-blue text-white rounded-0 mt-2 float-right w-100" data-id="${id-1}">${btn}</button>`;
+        dom.innerHTML +=`</div>`;
         
-        dom.querySelector(".basketAddBtn").addEventListener("click",this.basketAdd);
+        if(this.user.id !== company_id) dom.querySelector(".basketAddBtn").addEventListener("click",this.basketAdd);
         return dom;
     }
 }
