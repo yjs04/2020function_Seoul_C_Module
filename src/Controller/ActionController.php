@@ -9,12 +9,32 @@ class ActionController{
         checkEmpty();
         extract($_POST);
 
-        $sql = "INSERT INTO inventory(`user_id`,`sell_list`,`sum`) VALUES(?,?,?)";
+        $sql = "SELECT * FROM inventory WHERE `user_id` = ? ";
+        $result = DB::fetchAll($sql,[user()->id]);
 
-        $sum = 0;
         $list = json_decode($sell_list);
-        foreach($list as $item){$sum += $item->sum;}
-        DB::query($sql,[user()->id,$sell_list,$sum]);
+
+        $sell_basket = json_decode($sell_basket);
+        foreach($sell_basket as $basket){
+            $company = DB::fetch("SELECT * FROM users WHERE id = ?",[$basket->company_id]);
+            $company_point = $company->point + $basket->sum;
+            $sql = "UPDATE users SET `point` = ? WHERE id = ?";
+            DB::query($sql,[$company_point,$basket->company_id]);
+        }
+
+        $point = user()->point - $sell_point;
+
+        $sql = "UPDATE users SET `point` = ? WHERE id = ?";
+        DB::query($sql,[$point,user()->id]);
+
+        if($result == []){
+            $sql = "INSERT INTO inventory(`user_id`,`sell_list`) VALUES(?,?)";
+            DB::query($sql,[user()->id,$sell_list,$sum]);
+        }else{
+            $sql = "UPDATE inventory SET sell_list = ? WHERE `user_id` = ?";
+            DB::query($sql,[$sell_list,$sum,user()->id]);
+        }
+        
         echo json_encode(true);
     }
 

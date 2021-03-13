@@ -52,6 +52,9 @@ class Store{
 
     async setting(data){
         this.user = await fetch('/userInfo/admin').then(res=>res.json());
+        let list = await fetch('/inventory').then(res=>res.json());
+        list = list.length === 0 ? JSON.stringify(list) : list;
+        localStorage.setItem('inventory',list);
         // itemList
         data.forEach(x=>{
             x.point_num = parseInt(x.point.replace(/p/g,""));
@@ -181,15 +184,35 @@ class Store{
             newList.forEach(x=>{if(x !== "") return list.push(x);});
         }else list = this.basketList;
 
+        let sum = 0;
+        this.basketList.forEach(x =>{sum += (x.num * x.point_num);});
+        list.forEach(x=>{x.sum = (x.num * x.point_num);})
+
+        if(this.user.point < sum) return alert('포인트가 부족하여 구매하실 수 없습니다.');
+
         localStorage.setItem("inventory",JSON.stringify(list));
 
         let num = 0;
         this.basketList.forEach(x=>{num += x.num});
         alert(`총 ${num}개의 한지가 구매되었습니다.`);
-        this.itemList.forEach(x=>{x.num = 0;});
-        this.basketList = [];
-        this.setBasket();
-        this.setItemList(this.itemList);
+
+        $.ajax({
+            url:"/inventoryAddProcess",
+            method:"post",
+            data:{
+                sell_list:JSON.stringify(list),
+                sell_point:sum,
+                sell_basket:JSON.stringify(this.basketList)
+            },
+            success:(data)=>{
+                this.itemList.forEach(x=>{x.num = 0;});
+                this.basketList = [];
+                this.setBasket();
+                this.setItemList(this.itemList);
+                this.user.point -= sum;
+                document.querySelector("#basket_footer > span").innerHTML = `(보유 포인트 : ${this.user.point}p)`;
+            }
+        })
     }
 
     basketAdd=e=>{
@@ -208,7 +231,7 @@ class Store{
             item.idx = this.basketList.length;
             this.basketList.push(item);
         }
-        
+
         e.target.innerHTML = `추가하기(${item.num}개)`;
         this.setBasket();
     }

@@ -81,13 +81,16 @@ class Entry{
         });
 
         $("[data-target='#entry_modal']").on("click",async e=>{
-            let list = JSON.parse(localStorage.getItem("inventory")) === null ? [] : JSON.parse(localStorage.getItem("inventory"));
+            let list = await fetch("/entryPapers").then(res=>res.json());
+            localStorage.setItem("inventory",JSON.stringify(list));
+            list.forEach((x,idx)=>{x.idx = idx;});
+            console.log(list);
             $("#entry_modal .modal-body").html('');
             if(list.length){
                 list.forEach(item =>{
                     $("#entry_modal .modal-body").append(`<div class="entry_img_item" data-id="${item.idx}">
                                                                 <div class="entry_img_box">
-                                                                    <img class="entry_img" src='resource/image/${item.image}'>
+                                                                    <img class="entry_img" src='uploads/${item.image}'>
                                                                 </div>
                                                                 <div class="entry_img_info p-2 border border-top-0">
                                                                     <h5>${item.paper_name}</h5>
@@ -109,12 +112,15 @@ class Entry{
             let idx = e.currentTarget.dataset.id;
             let list = await JSON.parse(localStorage.getItem("inventory"));
             let item = list[idx];
-            list[idx].num--;
-            if(list[idx].num == 0){
-                list.splice(idx,1);
-                list.forEach((x,idx)=>{x.idx = idx})
+
+            if(item.num !== "∞"){
+                list[idx].num--;
+                if(list[idx].num == 0){
+                    list.splice(idx,1);
+                    list.forEach((x,idx)=>{x.idx = idx})
+                }
+                localStorage.setItem("inventory",JSON.stringify(list));
             }
-            localStorage.setItem("inventory",JSON.stringify(list));
 
             this.ws.pushPart(item);
 

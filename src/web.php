@@ -24,4 +24,6 @@ Router::get("/storePapers","AjaxController@storePapers","user");
 Router::get("/inventory","AjaxController@inventory","user");
 Router::post("/inventoryAddProcess",'ActionController@inventoryAddProcess',"user");
 
+Router::get("/entryPapers","AjaxController@entryPapers","user");
+
 Router::start();

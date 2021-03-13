@@ -29,7 +29,7 @@ class Workspace{
         let imageObj = new Image();
         width_size = width_size.replace(/px/g,"");
         height_size = height_size.replace(/px/g,"");
-        imageObj.src = "resource/image/"+image;
+        imageObj.src = "uploads/"+image;
         imageObj.onload = () =>{
             let canvas = document.createElement("canvas");
             canvas.width = width_size;

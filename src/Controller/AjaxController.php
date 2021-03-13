@@ -18,6 +18,37 @@ class AjaxController{
 
     function inventory(){
         $sql = "SELECT * FROM inventory WHERE `user_id` = ?";
-        $result = DB::fetchAll($sql,[user()->id]);
+        $result = DB::fetch($sql,[user()->id]);
+        if($result == []) $result = [];
+        else $result = $result->sell_list;
         echo json_encode($result);
     }
+
+    function entryPapers(){
+        $sql = "SELECT * FROM inventory WHERE `user_id` = ?";
+        $result = DB::fetch($sql,[user()->id]);
+        
+        if($result) $result = json_decode($result->sell_list);
+        else $result = [];
+
+        if(company()){
+            $sql = "SELECT * FROM papers WHERE company_id = ?";
+            $list = DB::fetchAll($sql,[user()->id]);
+            foreach($list as $item){
+                $item->num = '∞';
+                $item->sum = '∞';
+                $result[] = $item;
+            }
+        }
+
+        echo json_encode($result);
+    }
+
+    function entryUpdatePapers(){
+        extract($_POST);
+        $list = json_decode($sell_list);
+        foreach($list as $item){
+            
+        }
+    }
+}
