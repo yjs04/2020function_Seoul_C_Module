@@ -50,6 +50,14 @@ class Entry{
         document.querySelector("#helper_prev").addEventListener("click",()=>{this.helperPage("prev");});
         document.querySelector("#helper_next").addEventListener("click",()=>{this.helperPage("next");});
 
+        document.querySelector("#entry_button").addEventListener("click",()=>{
+            this.ws.tool && this.ws.tool.unselectAll();
+            $("#image").val(this.ws.canvas.toDataURL("image/jpeg"));
+            $("#work_tags").val(JSON.stringify(this.taging_list));
+
+            $("#entry_info_form")[0].submit();
+        });
+
         // canvas!!!
         $(".tool_item").on("click",e=>{
             let role = e.currentTarget.dataset.role;
@@ -84,7 +92,6 @@ class Entry{
             let list = await fetch("/entryPapers").then(res=>res.json());
             localStorage.setItem("inventory",JSON.stringify(list));
             list.forEach((x,idx)=>{x.idx = idx;});
-            console.log(list);
             $("#entry_modal .modal-body").html('');
             if(list.length){
                 list.forEach(item =>{
@@ -119,7 +126,15 @@ class Entry{
                     list.splice(idx,1);
                     list.forEach((x,idx)=>{x.idx = idx})
                 }
-                localStorage.setItem("inventory",JSON.stringify(list));
+
+                await $.ajax({
+                    url:"/entryUpdatePapers",
+                    method:"post",
+                    data:{sell_list:JSON.stringify(list)},
+                    success(data){
+                        localStorage.setItem("inventory",JSON.stringify(list));
+                    }
+                });
             }
 
             this.ws.pushPart(item);

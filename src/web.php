@@ -7,6 +7,7 @@ Router::get("/sub1","ViewController@sub1");
 Router::get("/sub2","ViewController@sub2");
 Router::get("/store","ViewController@store","user");
 Router::get("/entry","ViewController@entry","user");
+Router::get("/work","ViewController@work");
 
 // guest
 Router::get("/join","ViewController@join","guest");
@@ -25,5 +26,8 @@ Router::get("/inventory","AjaxController@inventory","user");
 Router::post("/inventoryAddProcess",'ActionController@inventoryAddProcess',"user");
 
 Router::get("/entryPapers","AjaxController@entryPapers","user");
+Router::post("/entryUpdatePapers","AjaxController@entryUpdatePapers","user");
+Router::post("/worksAddProcess","ActionController@worksAddProcess","user");
+
 
 Router::start();

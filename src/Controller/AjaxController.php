@@ -47,8 +47,23 @@ class AjaxController{
     function entryUpdatePapers(){
         extract($_POST);
         $list = json_decode($sell_list);
-        foreach($list as $item){
-            
+        $result = [];
+        foreach($list as $item){if($item->num !== "∞") $result[] = $item;}
+        $sql = "UPDATE inventory SET `sell_list` = ? WHERE `user_id` = ?";
+        DB::query($sql,[json_encode($result),user()->id]);
+        echo json_encode(true);
+    }
+
+    function entryTag(){
+        $list = [];
+        $sql = "SELECT work_tags FROM works";
+        $tags = DB::fetchAll($sql);
+        foreach($tags as $tag){
+            $work_tag = json_decode($tag);
+            foreach($work_tag as $work){
+                $flag = array_search($work,$list);
+                if(!$flag) $list[] = $work;
+            }
         }
     }
 }

@@ -1230,6 +1230,7 @@ footer{
     display: flex;
     justify-content: space-around;
     padding: 20px;
+    padding-bottom: 0;
     flex-wrap: wrap;
 }
 
@@ -1258,8 +1259,7 @@ footer{
 
 #copyright{
     color: #fff;
-    background-color: #222;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -1955,3 +1955,14 @@ footer{
 .context-menu-item:last-child{border: none;}
 
 .context-menu-item:hover{opacity: 0.7;}
+
+/* work */
+#great_work_area{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+#great_work_area > .gallery_img_wrap{margin: 20px;}

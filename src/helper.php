@@ -106,3 +106,11 @@ function init(){
         DB::query($sql,["admin","관리자",1234,"","admin"]);
     }
 }
+
+function base64_upload($data){
+    $temp = explode(";base64,",$data);
+    $data = base64_decode($temp[1]);
+    $filename = time().".jpg";
+    file_put_contents(UPLOAD."/$filename",$data);
+    return $filename;
+}

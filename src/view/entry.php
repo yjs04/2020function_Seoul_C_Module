@@ -1,3 +1,9 @@
+        <!-- visual -->
+        <div id="visual" class="subpage">
+            <img src="resource/image/sub1.gif" alt="sub1Visual">
+        </div>
+        <!-- /visual -->
+
         <!-- content -->
         <div id="content">
             <div class="sub_title_wrap container">
@@ -24,17 +30,19 @@
                         <h2 class="text-pink border-pink">출품 정보</h2>
                     </div>
                     <div class="content_box">
-                        <form id="entry_info_form">
+                        <form id="entry_info_form" method="post" action="/worksAddProcess">
                             <div class="form-group">
-                                <label for="entry_name" class="form-label">제목</label>
-                                <input type="text" id="entry_name" name="entry_name" class="form-control">
+                                <label for="work_name" class="form-label">제목</label>
+                                <input type="text" id="work_name" name="work_name" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="entry_content" class="form-label">설명</label>
-                                <textarea name="entry_content" id="entry_content" class="form-control" cols="30" rows="10"></textarea>
+                                <label for="work_content" class="form-label">설명</label>
+                                <textarea name="work_content" id="work_content" class="form-control" cols="30" rows="10"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="entry_word" class="form-label">해시태그</label>
+                                <input type="text" id="work_tags" name="work_tags" hidden>
+                                <input type="hidden" name="image" id="image">
                                 <div id="entry_tags" class="hash pink m-0">
                                     <div id="entry_input" class="hash_input">
                                         <input type="text" id="entry_word" class="hash_word" placeholder="자유롭게 입력해주세요.">
@@ -47,7 +55,7 @@
                             </div>
                         </form>
                         <div class="entry_button_box">
-                            <div id="entry_button">출품하기</div>
+                            <button id="entry_button" class="border-0">출품하기</button>
                         </div>
                     </div>
                 </div>

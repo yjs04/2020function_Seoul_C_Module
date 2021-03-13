@@ -5,6 +5,17 @@ namespace Controller;
 use App\DB;
 
 class ActionController{
+    function worksAddProcess(){
+        checkEmpty();
+        extract($_POST);
+
+        $work_img = base64_upload($image);
+        $sql = "INSERT INTO works(`creater_id`,`work_name`,`work_img`,`creater_type`,`create_date`,`work_tags`,`work_content`,`creater_name`) VALUES(?,?,?,?,?,?,?,?)";
+        DB::query($sql,[user()->id,$work_name,$work_img,user()->type,date('Y-m-d'),$work_tags,$work_content,user()->user_name]);
+
+        go("/entry","작품이 등록되었습니다.");
+    }
+
     function inventoryAddProcess(){
         checkEmpty();
         extract($_POST);
@@ -29,10 +40,10 @@ class ActionController{
 
         if($result == []){
             $sql = "INSERT INTO inventory(`user_id`,`sell_list`) VALUES(?,?)";
-            DB::query($sql,[user()->id,$sell_list,$sum]);
+            DB::query($sql,[user()->id,$sell_list]);
         }else{
             $sql = "UPDATE inventory SET sell_list = ? WHERE `user_id` = ?";
-            DB::query($sql,[$sell_list,$sum,user()->id]);
+            DB::query($sql,[$sell_list,user()->id]);
         }
         
         echo json_encode(true);

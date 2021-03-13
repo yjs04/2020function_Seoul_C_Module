@@ -32,4 +32,8 @@ class ViewController{
     function login(){
         view("login");
     }
+
+    function work(){
+        view("work");
+    }
 }
