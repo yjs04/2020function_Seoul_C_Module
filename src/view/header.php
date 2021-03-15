@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>전주한지문화축제</title>
-    <link rel="stylesheet" href="resource/bootstrap-4.3.1-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="resource/fontawesome-free-5.1.0-web/css/all.css">
-    <link rel="stylesheet" href="resource/css/style.css">
+    <link rel="stylesheet" href="/resource/bootstrap-4.3.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/resource/fontawesome-free-5.1.0-web/css/all.css">
+    <link rel="stylesheet" href="/resource/css/style.css">
 
-    <script src="resource/js/jquery-3.4.1.min.js"></script>
-    <script src="resource/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
+    <script src="/resource/js/jquery-3.4.1.min.js"></script>
+    <script src="/resource/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -17,7 +17,7 @@
         <header>
             <!-- logo -->
             <div id="logo">
-                <a href="/"><img src="resource/image/logo.png" alt="logo"></a>
+                <a href="/"><img src="/resource/image/logo.png" alt="logo"></a>
             </div>
             <!-- nav -->
             <input type="radio" class="not_pc" hidden name="nav_open" id="nav_close" checked>
@@ -44,7 +44,7 @@
                         <a href="#">한지공예대전</a>
                         <ul class="sub_menu">
                             <li><a href="/entry">출품신청</a></li>
-                            <li><a href="/work">참가작품</a></li>
+                            <li><a href="/artworks">참가작품</a></li>
                         </ul>
                     </li>
                     <li>

@@ -35,9 +35,28 @@ class ViewController{
         view("login");
     }
 
-    function work(){
-        $sql = "SELECT * FROM works WHERE `create_date` >= ? ORDER BY `score` DESC LIMIT 4";
-        $works = DB::fetchAll($sql,[date('Y-m-d',strtotime("-7 days"))]);
-        view("work",compact("works"));
+    function artworks(){
+        $sql = "SELECT * FROM works WHERE `create_date` >= ? AND `status` = ? ORDER BY `score` DESC LIMIT 4";
+        $best_works = DB::fetchAll($sql,[date('Y-m-d',strtotime("-7 days")),"normal"]);
+
+        $sql = "SELECT * FROM works WHERE `status` = ? ORDER BY `id` DESC";
+        $work = DB::fetchAll($sql,["normal"]);
+        $works = pagination($work);
+
+        $work_user = [];
+
+        if(user()){
+            $sql = "SELECT * FROM works WHERE creater_id = ? ORDER BY `id` DESC";
+            $work_user = DB::fetchAll($sql,[user()->id]);
+        }
+
+        view("artworks",compact("best_works","works","work_user"));
+    }
+
+    function artwork($id){
+        $sql = "SELECT U.user_email, U.image, W.* FROM works AS W, users AS U WHERE W.id = ? AND W.creater_id = U.id";
+        $work = DB::fetch($sql,[$id]);
+        $work = (array) $work;
+        view("artwork",$work);
     }
 }

@@ -6,6 +6,7 @@ use App\DB;
 
 class ActionController{
     function worksAddProcess(){
+        if(admin()) return go("/entry","관리자는 수행할 수 없는 기능입니다.");
         checkEmpty();
         extract($_POST);
 

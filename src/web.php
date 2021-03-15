@@ -7,7 +7,8 @@ Router::get("/overview","ViewController@overview");
 Router::get("/roadmap","ViewController@roadmap");
 Router::get("/store","ViewController@store","user");
 Router::get("/entry","ViewController@entry","user");
-Router::get("/work","ViewController@work");
+Router::get("/artworks","ViewController@artworks");
+Router::get("/artwork/{id}","ViewController@artwork");
 
 // guest
 Router::get("/join","ViewController@join","guest");

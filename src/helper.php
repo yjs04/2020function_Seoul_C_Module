@@ -73,7 +73,8 @@ function pagination($data){
     define("LIST_LENGTH",9);
     define("BLOCK_LENGTH",5);
 
-    $page = isset($_GET['page']) && is_numberic($_GET['page']) && $_GET['page'] >= 1 ? $_GET['page'] : 1;
+    $page = isset($_GET['page']) && (int) $_GET['page'] ? (int) $_GET['page'] : 1;
+    $page = $page >= 1 ? $page : 1;
 
     $totalPage= ceil(count($data)/LIST_LENGTH);
 
@@ -94,8 +95,8 @@ function pagination($data){
         $prev = false;
     }
 
-    $data = array_slice($data,($page - 1) * LIST_LENGTH);
-    return (object) compact("start","end","data","next","prev");
+    $data = array_slice($data,($page - 1) * LIST_LENGTH, LIST_LENGTH);
+    return (object) compact("start","end","data","next","prev","page");
 }
 
 function init(){

@@ -2,7 +2,7 @@
         <footer>
             <div id="footer_top">
                 <div id="footer_logo">
-                    <a href="/"><img src="resource/image/logo_footer.png" alt="footer-logo"></a>
+                    <a href="/"><img src="/resource/image/logo_footer.png" alt="footer-logo"></a>
                 </div>
                 <div id="footer_nav">
                     <ul>
@@ -24,7 +24,7 @@
                             <a href="#">한지공예대전</a>
                             <ul class="footer_sub_nav">
                                 <li><a href="/entry">출품신청</a></li>
-                                <li><a href="/work">참가작품</a></li>
+                                <li><a href="/artworks">참가작품</a></li>
                             </ul>
                         </li>
                         <li>
