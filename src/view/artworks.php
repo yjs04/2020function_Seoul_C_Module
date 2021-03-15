@@ -44,8 +44,17 @@
     </div>
 
     <div class="content_wrap container">
-        <div class="content_title">
+        <div class="content_title"  id="all_work_area">
             <h2 class="border-blue text-blue">모든 작품</h2>
+            <div id="search" class="hash">
+                <div id="search_input" class="hash_input">
+                    <input type="text" id="search_word" class="hash_word" placeholder="자유롭게 입력해주세요.">
+                    <span>#</span>
+                </div>
+                <div id="search_value" class="hash_value"></div>
+                <div id="search_errorMsg" class="hash_errorMsg"></div>
+                <div id="search_hash_box" class="auto_hash_box"></div>
+            </div>
         </div>
         <div class="content_box" id="all_work_area">
         
@@ -128,18 +137,5 @@
 </div>
 <!-- /content -->
 
-<script>
-    window.onload = ()=>{
-        function work(){
-            let img = document.querySelectorAll(".gallery_img_wrap");
-            img.forEach(x=>{
-                x.addEventListener("click",e=>{
-                    let idx = e.target.dataset.id;
-                    if(idx !== "") location.href = `/artwork/${idx}`;
-                });
-            })
-        }
-
-        work();
-    }
-</script>
+<script type="module" src="resource/js/tag.js"></script>
+<script type="module" src="resource/js/artwork.js"></script>

@@ -2118,6 +2118,8 @@ footer{
     align-items: flex-end;
 }
 
+#artwork_buttons{height: 24px;}
+
 .artwork_btn{
     transition: .3s;
     border: none;
@@ -2130,3 +2132,12 @@ footer{
 .artwork_btn:last-child:hover{color: #EB4F4F;}
 
 #artwork_date{font-size: 0.8em;}
+
+#all_work_area{
+    padding-top: 20px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+}

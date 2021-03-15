@@ -37,7 +37,7 @@
                     <div id="artwork_creater_img">
                     </div>
                 </div>
-                <p><?=$data["work_content"]?></p>
+                <p><?=enc($data["work_content"])?></p>
             </div>
         </div>
     </div>

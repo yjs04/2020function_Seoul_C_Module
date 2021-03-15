@@ -6,9 +6,9 @@ use App\DB;
 
 class ViewController{
     function index(){
-        $sql = "SELECT * FROM works ORDER BY `id` DESC LIMIT 3";
-        $works = DB::fetchAll($sql);
-        view("index",$works);
+        $sql = "SELECT * FROM works WHERE `status` = ? ORDER BY `id` DESC LIMIT 3";
+        $works = DB::fetchAll($sql,["normal"]);
+        view("index",compact("works"));
     }
 
     function overview(){

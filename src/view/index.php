@@ -163,42 +163,30 @@
                 </div>
                 <div class="content_box">
                     <div id="gallery_box">
-                        <div class="gallery_img_wrap">
-                            <div class="gallery_img_box">
-                                <img src="resource/image/gallery1.jpg" alt="gallery_img">
-                            </div>
-                            <div class="gallery_title">
-                                <h3>포뭄과 말룸</h3>
-                                <p>제작자 : 오주희</p>
-                            </div>
-                            <div class="gallery_border_box"><div class="gallery_border"></div></div>
-                            <div class="gallery_border_left"></div>                            
-                            <div class="gallery_border_bottom"></div>
+                    <?php if($data["works"] !== []):?>
+                    <?php foreach($data["works"] as $item):?>
+                    <div class="gallery_img_wrap" data-id="<?=$item->id?>">
+                        <div class="gallery_img_box">
+                            <img src="uploads/<?=$item->work_img?>" alt="gallery_img">
+                            <span class="text-white">우수작품</span>
+                            <p class="text-white"><?=$item->create_date?></p>
                         </div>
-                        <div class="gallery_img_wrap">
-                            <div class="gallery_img_box">
-                                <img src="resource/image/gallery2.jpg" alt="gallery_img">
+                        <div class="gallery_title">
+                            <h3><?=$item->work_name?></h3>
+                            <p class='m-0'>제작자 : <?=$item->creater_name?> (<?=$item->creater_type == "user" ? "일반" : "기업"?>)</p>
+                            <div class="gallery_info">
+                                <p class="gallery_hash m-0"><?php foreach(json_decode($item->work_tags) as $tags):?><span>#<?=$tags?></span><?php endforeach;?></p>
+                                <span class="gallery_star "><i class="fas fa-star text-yellow"></i> <?=$item->score?></span>
                             </div>
-                            <div class="gallery_title">
-                                <h3>검독수리 사냥</h3>
-                                <p>제작자 : 범인자</p>
-                            </div>
-                            <div class="gallery_border_box"><div class="gallery_border"></div></div>
-                            <div class="gallery_border_left"></div>                            
-                            <div class="gallery_border_bottom"></div>
                         </div>
-                        <div class="gallery_img_wrap">
-                            <div class="gallery_img_box">
-                                <img src="resource/image/gallery3.jpg" alt="gallery_img">
-                            </div>
-                            <div class="gallery_title">
-                                <h3>둥근상</h3>
-                                <p>제작자 : 전학식</p>
-                            </div>
-                            <div class="gallery_border_box"><div class="gallery_border"></div></div>
-                            <div class="gallery_border_left"></div>                            
-                            <div class="gallery_border_bottom"></div>
-                        </div>
+                        <div class="gallery_border_box"><div class="gallery_border"></div></div>
+                        <div class="gallery_border_left"></div>                            
+                        <div class="gallery_border_bottom"></div>
+                    </div>
+                    <?php endforeach;?>
+                    <?php else:?>
+                    <div class="bc-gray p-3 w-100 text-center">우수작품이 없습니다!</div>
+                    <?php endif;?>
                         <button id="gallery_button">갤러리<i class="fas fa-angle-right"></i></button>
                     </div>
                 </div>
@@ -264,3 +252,19 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            window.onload = ()=>{
+                function work(){
+                    let img = document.querySelectorAll(".gallery_img_wrap");
+                    img.forEach(x=>{
+                        x.addEventListener("click",e=>{
+                            let idx = e.target.dataset.id;
+                            if(idx !== "") location.href = `/artwork/${idx}`;
+                        });
+                    })
+                }
+
+                work();
+            }
+        </script>
