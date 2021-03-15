@@ -96,11 +96,11 @@
                         </div>
                     </div>
                     <div id="intro_link">
-                        <a href="#"><div class="intro_link_hover"></div><span>축제개요</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
-                        <a href="#"><div class="intro_link_hover"></div><span>오시는 길</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
-                        <a href="#"><div class="intro_link_hover"></div><span>한지 스토어</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
-                        <a href="#"><div class="intro_link_hover"></div><span>출품 신청</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
-                        <a href="#"><div class="intro_link_hover"></div><span>참가 작품</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
+                        <a href="/overview"><div class="intro_link_hover"></div><span>축제개요</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
+                        <a href="/roadmap"><div class="intro_link_hover"></div><span>오시는 길</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
+                        <a href="/store"><div class="intro_link_hover"></div><span>한지 스토어</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
+                        <a href="/entry"><div class="intro_link_hover"></div><span>출품 신청</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
+                        <a href="/work"><div class="intro_link_hover"></div><span>참가 작품</span><div class="border-design left border-pink"></div><div class="border-design right border-pink"></div></a>
                     </div>
                 </div>
             </div>

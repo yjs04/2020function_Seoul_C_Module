@@ -5,7 +5,7 @@
 <!-- /visual -->
 
 <!-- content -->
-<div id="content">
+<div id="content" class="work_page">
     <div class="sub_title_wrap container">
         <h5><a href="#">한지공예대전</a> <i class="fas fa-angle-right"></i> <a href="/work">참가작품</a></h5>
         <h2>참가작품</h2>
@@ -14,58 +14,31 @@
         <div class="content_title">
             <h2 class="border-blue text-blue">우수 작품</h2>
         </div>
+
         <div class="content_box" id="great_work_area">
+            <?php if($data["works"] !== []):?>
+            <?php foreach($data["works"] as $item):?>
             <div class="gallery_img_wrap">
                 <div class="gallery_img_box">
-                    <img src="resource/image/gallery1.jpg" alt="gallery_img">
+                    <img src="uploads/<?=$item->work_img?>" alt="gallery_img">
+                    <span class="text-white">우수작품</span>
                 </div>
                 <div class="gallery_title">
-                    <h3>포뭄과 말룸</h3>
-                    <p>제작자 : 오주희</p>
+                    <h3><?=$item->work_name?></h3>
+                    <p class='m-0'>제작자 : <?=$item->creater_name?></p>
+                    <div class="gallery_info">
+                        <p class="gallery_hash m-0"><?php foreach(json_decode($item->work_tags) as $tags):?><span>#<?=$tags?></span><?php endforeach;?></p>
+                        <span class="gallery_star "><i class="fas fa-star text-yellow"></i> <?=$item->score?></span>
+                    </div>
                 </div>
                 <div class="gallery_border_box"><div class="gallery_border"></div></div>
                 <div class="gallery_border_left"></div>                            
                 <div class="gallery_border_bottom"></div>
             </div>
-
-            <div class="gallery_img_wrap">
-                <div class="gallery_img_box">
-                    <img src="resource/image/gallery1.jpg" alt="gallery_img">
-                </div>
-                <div class="gallery_title">
-                    <h3>포뭄과 말룸</h3>
-                    <p>제작자 : 오주희</p>
-                </div>
-                <div class="gallery_border_box"><div class="gallery_border"></div></div>
-                <div class="gallery_border_left"></div>                            
-                <div class="gallery_border_bottom"></div>
-            </div>
-
-            <div class="gallery_img_wrap">
-                <div class="gallery_img_box">
-                    <img src="resource/image/gallery1.jpg" alt="gallery_img">
-                </div>
-                <div class="gallery_title">
-                    <h3>포뭄과 말룸</h3>
-                    <p>제작자 : 오주희</p>
-                </div>
-                <div class="gallery_border_box"><div class="gallery_border"></div></div>
-                <div class="gallery_border_left"></div>                            
-                <div class="gallery_border_bottom"></div>
-            </div>
-
-            <div class="gallery_img_wrap">
-                <div class="gallery_img_box">
-                    <img src="resource/image/gallery1.jpg" alt="gallery_img">
-                </div>
-                <div class="gallery_title">
-                    <h3>포뭄과 말룸</h3>
-                    <p>제작자 : 오주희</p>
-                </div>
-                <div class="gallery_border_box"><div class="gallery_border"></div></div>
-                <div class="gallery_border_left"></div>                            
-                <div class="gallery_border_bottom"></div>
-            </div>
+            <?php endforeach;?>
+            <?php else:?>
+            <div class="bc-gray p-3 w-100 text-center">우수작품이 없습니다!</div>
+            <?php endif;?>
         </div>
     </div>
 

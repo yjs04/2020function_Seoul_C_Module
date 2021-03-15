@@ -5,7 +5,7 @@
         <!-- content -->
         <div id="content">
             <div class="sub_title_wrap container">
-                <h5><a href="/">전주한지문화축제</a> <i class="fas fa-angle-right"></i> <a href="/sub2">찾아오시는길</a></h5>
+                <h5><a href="/">전주한지문화축제</a> <i class="fas fa-angle-right"></i> <a href="/roadmap">찾아오시는길</a></h5>
                 <h2>찾아오시는길</h2>
             </div>
             <div class="content_wrap container" id="sub_map">

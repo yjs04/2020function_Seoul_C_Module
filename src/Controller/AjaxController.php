@@ -58,12 +58,15 @@ class AjaxController{
         $list = [];
         $sql = "SELECT work_tags FROM works";
         $tags = DB::fetchAll($sql);
+
         foreach($tags as $tag){
-            $work_tag = json_decode($tag);
+            $work_tag = json_decode($tag->work_tags);
             foreach($work_tag as $work){
                 $flag = array_search($work,$list);
                 if(!$flag) $list[] = $work;
             }
         }
+
+        echo json_encode($list);
     }
 }

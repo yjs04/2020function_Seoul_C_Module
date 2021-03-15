@@ -14,7 +14,7 @@ class Entry{
         this.index = 0;
         this.ws = new Workspace(this);
 
-        fetch('resource/js/craftworks.json')
+        fetch('/entryTag')
         .then(res=>res.json())
         .then(data=>this.setting(data))
     }
@@ -33,8 +33,7 @@ class Entry{
 
     setting(data){
         // taging
-        let list = [];
-        data.forEach(x=>{x.hash_tags.forEach(item=>{if(list.find(tag=>"#"+tag === item)===undefined)list.push(item.replace(/#/g,""))})});
+        let list = data;
         let hash_entry = $("#entry_word");
         let hash_result_box = document.querySelector("#entry_value");
         let hash_error_box = document.querySelector("#entry_errorMsg");

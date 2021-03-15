@@ -9,8 +9,8 @@
                         <li>
                             <a href="/">전주한지문화축제</a>
                             <ul class="footer_sub_nav">
-                                <li><a href="/sub1">개요/연혁</a></li>
-                                <li><a href="/sub2">찾아오시는길</a></li>
+                                <li><a href="/overview">개요/연혁</a></li>
+                                <li><a href="/roadmap">찾아오시는길</a></li>
                             </ul>
                         </li>
                         <li>
