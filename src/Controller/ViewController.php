@@ -40,6 +40,7 @@ class ViewController{
         $best_works = DB::fetchAll($sql,[date('Y-m-d',strtotime("-7 days")),"normal"]);
 
         $sql = "SELECT * FROM works WHERE `status` = ? ORDER BY `id` DESC";
+        
         $work = DB::fetchAll($sql,["normal"]);
         $works = pagination($work);
 
@@ -66,5 +67,17 @@ class ViewController{
         }
         $work['star_flag'] = $flag;
         view("artwork",$work);
+    }
+
+    function company(){
+        view("company");
+    }
+
+    function notice(){
+        view("notice");
+    }
+
+    function question(){
+        view("question");
     }
 }

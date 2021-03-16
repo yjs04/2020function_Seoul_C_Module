@@ -9,6 +9,9 @@ Router::get("/store","ViewController@store","user");
 Router::get("/entry","ViewController@entry","user");
 Router::get("/artworks","ViewController@artworks");
 Router::get("/artwork/{id}","ViewController@artwork");
+Router::get("/company","ViewController@company");
+Router::get("/notice","ViewController@notice");
+Router::get("/question","ViewController@question");
 
 // guest
 Router::get("/join","ViewController@join","guest");
