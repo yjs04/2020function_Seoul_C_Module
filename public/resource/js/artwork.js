@@ -21,7 +21,20 @@ class App{
         if(document.querySelector("#artwork_score_add_btn")) document.querySelector("#artwork_score_add_btn").addEventListener("click",e=>{
             let work_id = e.target.dataset.work_id;
             let worker_id = e.target.dataset.worker_id;
-            console.log(work_id,worker_id);
+            let val = document.querySelector("#score").value;
+            $.ajax({
+                url:"/scoreAdd",
+                method:"post",
+                data:{
+                    val:val,
+                    work_id:work_id,
+                    worker_id:worker_id
+                },
+                success(data){
+                    alert("평점이 등록 되었습니다.");
+                    location.reload();
+                }
+            })
         });
     }
 }

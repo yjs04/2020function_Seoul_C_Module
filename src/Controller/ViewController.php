@@ -57,6 +57,14 @@ class ViewController{
         $sql = "SELECT U.user_email, U.image, W.* FROM works AS W, users AS U WHERE W.id = ? AND W.creater_id = U.id";
         $work = DB::fetch($sql,[$id]);
         $work = (array) $work;
+
+        $flag = false;
+        if(user() && user()->id !== $work['creater_id']){
+            $sql = "SELECT * FROM scores WHERE giver_id = ? AND work_id = ?";
+            $result = DB::fetch($sql,[user()->id,$id]);
+            if(!$result) $flag = true;
+        }
+        $work['star_flag'] = $flag;
         view("artwork",$work);
     }
 }

@@ -33,7 +33,6 @@
                         <span id="artwork_date"><?=$data["create_date"]?></span>
                     </div>
                 </div>
-                <?php #var_dump($data);?>
                 <div id="artwork_content">
                     <p><?=enc($data["work_content"])?></p>
                     <div id="artwork_content_footer">
@@ -44,7 +43,7 @@
                         </div>
                         <div id="artwork_stars">
                             <span id="artwork_star"><i class="fas fa-star mr-1"></i><?=$data['score']?></span>
-                            <?php if(user() && !($data['creater_id'] == user()->id)):?>
+                            <?php if($data['star_flag']):?>
                             <div id="artwork_score_add">
                                 <input type="number" hidden name="score" id="score" value="5">
                                 <p id="artwork_score_selected">

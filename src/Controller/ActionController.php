@@ -105,7 +105,7 @@ class ActionController{
 
         $sql = "SELECT SUM(val) AS score,COUNT(id) AS cnt FROM scores WHERE work_id = ?";
         $result = DB::fetch($sql,[$work_id]);
-        $score = round(($result->sum / $result->cnt),1);
+        $score = round((float)($result->score / $result->cnt),1);
         
         $sql = "UPDATE works SET `score` = ? WHERE id = ?";
         DB::query($sql,[$score,$work_id]);
