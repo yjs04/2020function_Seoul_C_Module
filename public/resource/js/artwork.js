@@ -2,6 +2,7 @@ import tag from './tag.js';
 class App{
     constructor(){
         this.tag = null;
+        this.taging_list = [];
         this.setEvent();
     }
 
@@ -36,6 +37,24 @@ class App{
                 }
             })
         });
+
+        if(document.querySelector("#mod_popup")){
+            document.querySelector("#artwork_modOpen_btn").addEventListener("click",async ()=>{
+                let list = await fetch("/entryTag").then(res=>res.json());
+                let mod_input = $("#mod_word");
+                let result_box = document.querySelector("#mod_value");
+                let error_box = document.querySelector("#mod_errorMsg");
+                let auto_box = document.querySelector("#mod_hash_box");
+                this.tag = new tag(mod_input,result_box,error_box,auto_box,list,[],this);
+                mod_input.on("propertychange change input keyup keydown",this.tag.hash_searching);
+            });
+
+            document.querySelector("#artwork_mod_btn").addEventListener("click",e=>{
+                document.querySelector("#work_tags").value = JSON.stringify(this.taging_list);
+                if(!this.taging_list.length) return alert("내용을 입력해주세요!");
+                document.querySelector("#mod_form").submit();
+            });
+        }
     }
 }
 

@@ -24,7 +24,7 @@
                     <div id="artwork_header_box">
                         <div id="artwork_buttons">
                             <?php if(user() && $data['creater_id'] == user()->id):?>
-                            <button class="artwork_btn">수정하기</button>
+                            <button class="artwork_btn" data-toggle="modal" data-target="#mod_popup" id="artwork_modOpen_btn">수정하기</button>
                             <?php endif;?>
                             <?php if((user() && $data['creater_id'] == user()->id) || admin()):?>
                             <button class="artwork_btn">삭제하기</button>
@@ -33,6 +33,7 @@
                         <span id="artwork_date"><?=$data["create_date"]?></span>
                     </div>
                 </div>
+
                 <div id="artwork_content">
                     <p><?=enc($data["work_content"])?></p>
                     <div id="artwork_content_footer">
@@ -142,6 +143,50 @@
                         <p class="m-0"><?=$data['creater_type'] == "company" ? "기업" : "일반"?></p>
                     </div>
                 </div>
+
+                <?php if(user() && $data['creater_id'] == user()->id):?>
+                <div id="mod_popup" class="modal fade" tabindex="1">
+                    <div class="modal-dialog popup overflow-hidden">
+                        <div class="modal-content rounded-0 border-0">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title">상품등록</h5>
+                                <button class="close" id="mod_close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="mod_form" method="post" action="/workMod">
+                                    <div class="form-group">
+                                        <label for="work_name" class="form-label">이름</label>
+                                        <input type="text" id="work_name" name="work_name" class="form-control" required>
+                                        <p class="form-text pl-2 text-danger"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="work_content" class="form-label">설명</label>
+                                        <textarea class="form-control" name="work_content" id="work_content" cols="30" rows="10" required></textarea>
+                                        <p class="form-text pl-2 text-danger"></p>
+                                    </div>
+                                    <input type="text" hidden id="work_tags" name="work_tags" required>
+                                    <input type="number" hidden id="id" name="id" value="<?=$data['id']?>">
+                                    <div class="form-group">
+                                        <label for="mod_word" class="form-label">해시태그</label>
+                                        <div id="mod-tags" class="hash m-0">
+                                            <div id="mod_input" class="hash_input">
+                                                <input type="text" id="mod_word" class="hash_word" placeholder="자유롭게 입력해주세요.">
+                                                <span>#</span>
+                                            </div>
+                                            <div id="mod_value" class="hash_value"></div>
+                                            <div id="mod_errorMsg" class="hash_errorMsg"></div>
+                                            <div id="mod_hash_box" class="auto_hash_box"></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer border-0 rounded-0 p-0">
+                                <button class="btn rounded-0 text-white w-100 p-2 bc-blue" id="artwork_mod_btn">수정완료</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endif;?>
 
             </div>
         </div>

@@ -131,13 +131,12 @@ class ActionController{
     }
 
     function workMod(){
-        checkEmpty();
         extract($_POST);
 
         $sql = "UPDATE works SET `work_name` = ?,`work_content` = ?,`work_tags` = ? WHERE id = ?";
         DB::query($sql,[$work_name,$work_content,$work_tags,$id]);
 
-        echo json_encode(true);
+        go("/artwork/$id","해당 작품이 수정되었습니다.");
     }
 
 }

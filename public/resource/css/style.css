@@ -692,7 +692,8 @@
 
 #artwork_creater_info > p:first-child{font-weight: bold;}
 #artwork_creater_info > p:last-child{font-weight: bold;font-size: 0.9em;color: #555;}
-#artwork_content{display: grid;grid-template-rows: 1fr auto;}
+#artwork_content{display: grid;grid-template-rows: 1fr auto;width: 100%;}
+#artwork_content > p{width: 100%;overflow-wrap: anywhere;}
 
 #artwork_score_selected > i{
     color: #F35A5A;
