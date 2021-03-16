@@ -73,6 +73,20 @@ function pagination($data){
     define("LIST_LENGTH",9);
     define("BLOCK_LENGTH",5);
 
+    $hash = isset($_GET['search']) && json_decode($_GET['search']) !== [] ? json_decode($_GET['search']) : [];
+
+    $list = [];
+    if($hash !== []){
+        foreach($data as $item){
+            $flag = true;
+            $item_hash = json_decode($item->work_tags);
+            foreach($hash as $h){if(!(array_search($h,$item_hash) !== false)) $flag = false;}
+            if($flag) $list[] = $item;
+        }
+        $data = $list;
+    }
+
+
     $page = isset($_GET['page']) && (int) $_GET['page'] ? (int) $_GET['page'] : 1;
     $page = $page >= 1 ? $page : 1;
 
@@ -96,7 +110,8 @@ function pagination($data){
     }
 
     $data = array_slice($data,($page - 1) * LIST_LENGTH, LIST_LENGTH);
-    return (object) compact("start","end","data","next","prev","page");
+
+    return (object) compact("start","end","data","next","prev","page","hash");
 }
 
 function init(){

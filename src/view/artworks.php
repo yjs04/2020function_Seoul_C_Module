@@ -44,21 +44,26 @@
     </div>
 
     <div class="content_wrap container">
-        <div class="content_title"  id="all_work_area">
+        <div class="content_title"  id="all_work_header">
             <h2 class="border-blue text-blue">모든 작품</h2>
-            <div id="search" class="hash">
-                <div id="search_input" class="hash_input">
-                    <input type="text" id="search_word" class="hash_word" placeholder="자유롭게 입력해주세요.">
-                    <span>#</span>
+            <div id="artwork_search">
+                <div id="search" class="hash">
+                    <div id="search_input" class="hash_input">
+                        <input type="text" id="search_word" class="hash_word" placeholder="자유롭게 입력해주세요.">
+                        <span>#</span>
+                    </div>
+                    <div id="search_value" class="hash_value"></div>
+                    <div id="search_errorMsg" class="hash_errorMsg"></div>
+                    <div id="search_hash_box" class="auto_hash_box"></div>
                 </div>
-                <div id="search_value" class="hash_value"></div>
-                <div id="search_errorMsg" class="hash_errorMsg"></div>
-                <div id="search_hash_box" class="auto_hash_box"></div>
+                <button id="artwork_search_btn"><i class="fas fa-search"></i></button>
             </div>
         </div>
-        <div class="content_box" id="all_work_area">
+
+        <div class="content_box" id="all_work">
         
-        <?php if($data["works"] !== []): ?>
+        <div id="all_work_area">
+        <?php if($data["works"]->data !== []): ?>
         <?php foreach($data['works']->data as $item):?>
         <div class="gallery_img_wrap" data-id="<?=$item->id?>">
             <div class="gallery_img_box">
@@ -81,16 +86,17 @@
         <?php else: ?>
             <div class="bc-gray p-3 w-100 text-center">작품이 없습니다!</div>
         <?php endif;?>
+        </div>
         <nav aria-label="Page navigation" class="m-3">
             <ul class="pagination m-0">
                 <?php if($data["works"]->prev):?>
-                <li class="page-item"><a class="page-link" href="/artworks?page<?=$data["works"]->start - 1?>" aria-label="Previous"><span aria-hidden="true"><i class="fas fa-angle-left"></i></span></a></li>
+                <li class="page-item"><a class="page-link" href="/artworks?page<?=$data["works"]->start - 1?><?= $data['works']->hash !== "[]" ? "&search=".json_encode($data['works']->hash,JSON_UNESCAPED_UNICODE) : ""?>" aria-label="Previous"><span aria-hidden="true"><i class="fas fa-angle-left"></i></span></a></li>
                 <?php endif;?>
                 <?php for($i = $data["works"]->start; $i <= $data["works"]->end; $i++):?>
-                <li class="page-item <?= $i == $data["works"]->page ? "active" : "" ?>"><a class="page-link" href="/artworks?page=<?=$i?>"><?=$i?></a></li>
+                <li class="page-item <?= $i == $data["works"]->page ? "active" : "" ?>"><a class="page-link" href='/artworks?page=<?=$i?><?= $data['works']->hash !== "[]" ? "&search=".json_encode($data['works']->hash,JSON_UNESCAPED_UNICODE) : ""?>'><?=$i?></a></li>
                 <?php endfor;?>
                 <?php if($data["works"]->next):?>
-                <li class="page-item"><a class="page-link" href="/artworks?page<?=$data["works"]->end + 1?>" aria-label="Next"><span aria-hidden="true"><i class="fas fa-angle-right"></i></span></a></li>
+                <li class="page-item"><a class="page-link" href="/artworks?page<?=$data["works"]->end + 1?><?= $data['works']->hash !== "[]" ? "&search=".json_encode($data['works']->hash,JSON_UNESCAPED_UNICODE) : ""?>" aria-label="Next"><span aria-hidden="true"><i class="fas fa-angle-right"></i></span></a></li>
                 <?php endif;?>
             </ul>
         </nav>
@@ -130,6 +136,7 @@
         </div>
         <?php endforeach;?>
         <?php else:?>
+            <div class="bc-gray p-3 w-100 text-center">등록한 작품이 없습니다!</div>
         <?php endif;?>
         </div>
     </div>

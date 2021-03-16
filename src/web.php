@@ -29,6 +29,8 @@ Router::post("/inventoryAddProcess",'ActionController@inventoryAddProcess',"user
 Router::get("/entryPapers","AjaxController@entryPapers","user");
 Router::post("/entryUpdatePapers","AjaxController@entryUpdatePapers","user");
 Router::post("/worksAddProcess","ActionController@worksAddProcess","user");
-Router::get("/entryTag","AjaxController@entryTag","user");
+Router::get("/entryTag","AjaxController@entryTag");
+
+Router::get("/LoadArtworks","AjaxController@artworks");
 
 Router::start();

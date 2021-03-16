@@ -69,4 +69,11 @@ class AjaxController{
 
         echo json_encode($list);
     }
+
+    function artworks(){
+        $sql = "SELECT * FROM works WHERE `status` = ? ORDER BY `id` DESC";
+        $artworks = DB::fetchAll($sql,["normal"]);
+        $artworks = pagination($artworks);
+        echo json_encode($artworks);
+    }
 }

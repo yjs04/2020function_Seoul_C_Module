@@ -53,11 +53,11 @@ header{
 }
 
 /* nav */
-nav{z-index: 100;position: relative;}
-nav > ul{display: flex;}
-nav > ul > li{margin-top: 20px;width: 180px;}
+header > nav{z-index: 100;position: relative;}
+header > nav > ul{display: flex;}
+header > nav > ul > li{margin-top: 20px;width: 180px;}
 
-nav > ul > li > a{
+header > nav > ul > li > a{
     font-size: 18px;
     display: inline-block;
     width: 100%;
@@ -65,7 +65,7 @@ nav > ul > li > a{
     transition: 0.3s all;
 }
 
-nav .sub_menu{
+header > nav .sub_menu{
     width: 100%;
     height: 0px;
     text-align: center;
@@ -85,10 +85,10 @@ nav .sub_menu{
     transition: .3s;
 }
 
-nav:hover .sub_menu{height: 130px;}
-nav:hover ~ .sub_menu_bc{height: 128px;}
+header > nav:hover .sub_menu{height: 130px;}
+header > nav:hover ~ .sub_menu_bc{height: 128px;}
 
-nav .sub_menu > li > a{
+header > nav .sub_menu > li > a{
     display: inline-block;
     height: 66px;
     width: 100%;
@@ -97,9 +97,9 @@ nav .sub_menu > li > a{
     cursor: pointer;
 }
 
-nav .sub_menu > li > a:hover{color: #fff;background-color: #555;}
+header > nav .sub_menu > li > a:hover{color: #fff;background-color: #555;}
 
-nav > ul > li >a:hover{color: #aaa;}
+header > nav > ul > li >a:hover{color: #aaa;}
 
 #nav_open_label{
     width: 30px;
@@ -133,7 +133,7 @@ nav > ul > li >a:hover{color: #aaa;}
         left: 0;
     }
 
-    nav{
+    header > nav{
         position: fixed;
         top: 100px;
         right: -100%;
@@ -148,15 +148,15 @@ nav > ul > li >a:hover{color: #aaa;}
 
     .sub_menu_bc{display: none;}
 
-    nav > ul{flex-direction: column;margin: 0;}
-    nav > ul > li{
+    header > nav > ul{flex-direction: column;margin: 0;}
+    header > nav > ul > li{
         width: 100%;
         margin-top: 10px;
     }
 
-    nav:hover .sub_menu{height: 70px;}
+    header > nav:hover .sub_menu{height: 70px;}
 
-    nav > ul > li > a{
+    header > nav > ul > li > a{
         margin-top: 20px;
         padding: 5px 20px;
         padding-right: 40px;
@@ -166,19 +166,19 @@ nav > ul > li >a:hover{color: #aaa;}
         text-align: left;
     }
 
-    nav .sub_menu{
+    header > nav .sub_menu{
         height: 70px;
         margin-top: 0px;
     }
 
-    nav .sub_menu > li{
+    header > nav .sub_menu > li{
         padding: 5px 55px;
         text-align: left;
     }
 
-    nav .sub_menu > li:hover{background-color: #555;}
-    nav .sub_menu > li:hover >a{color: #fff;}
-    nav .sub_menu a{color: #000;padding: 0 !important;height: auto !important;}
+    header > nav .sub_menu > li:hover{background-color: #555;}
+    header > nav .sub_menu > li:hover >a{color: #fff;}
+    header > nav .sub_menu a{color: #000;padding: 0 !important;height: auto !important;}
 
     #user{
         position: fixed;
@@ -2014,11 +2014,11 @@ footer{
     flex-wrap: wrap;
 }
 
-#all_work_area nav{width: 100%;}
-#all_work_area .pagination{justify-content: center;align-items: center;}
-#all_work_area .page-item{width: auto;margin-top: 0;}
-#all_work_area .page-item.active > .page-link{background-color: #526788 !important; color: #fff !important;}
-#all_work_area .page-link{
+#all_work nav{width: 100%;}
+#all_work .pagination{justify-content: center;align-items: center;}
+#all_work .page-item{width: auto;margin-top: 0;}
+#all_work .page-item.active > .page-link{background-color: #526788 !important; color: #fff !important;}
+#all_work .page-link{
     border-radius: 0.1em;
     color: #5A7091;
     margin: 0;
@@ -2027,12 +2027,30 @@ footer{
     line-height: 35px;
     width: 35px;
     height: 35px;
+    text-align: center;
 }
 
-#all_work_area .page-link > span > i{color: #2B4585;pointer-events: none;}
+#all_work .page-link > span > i{color: #2B4585;pointer-events: none;}
 
-#all_work_area .page-item:first-child{margin-right: 10px;}
-#all_work_area .page-item:last-child{margin-left: 10px;}
+#all_work .page-item:first-child{margin-right: 10px;}
+#all_work .page-item:last-child{margin-left: 10px;}
+
+#artwork_search{
+    display: flex;
+    justify-content: center;
+}
+
+#artwork_search_btn{
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    width: 44px;
+    height: 44px;
+    margin-top: 20px;
+    transition: .3s;
+}
+
+#artwork_search_btn > i {pointer-events: none;}
+#artwork_search_btn:hover{opacity: .7;}
 
 .gallery_img_box > p{
     position: absolute;
@@ -2133,11 +2151,11 @@ footer{
 
 #artwork_date{font-size: 0.8em;}
 
-#all_work_area{
+#all_work_header{
     padding-top: 20px;
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 50;
     background-color: #fff;
 }
