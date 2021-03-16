@@ -32,5 +32,8 @@ Router::post("/worksAddProcess","ActionController@worksAddProcess","user");
 Router::get("/entryTag","AjaxController@entryTag");
 
 Router::get("/LoadArtworks","AjaxController@artworks");
+Router::post("/workMod","ActionController@workMod","user");
+Router::post("/workDel","ActionController@workDel","user");
+Router::post("/scoreAdd","ActionController@scoreAdd","user");
 
 Router::start();

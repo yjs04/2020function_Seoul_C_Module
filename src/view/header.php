@@ -6,6 +6,7 @@
     <title>전주한지문화축제</title>
     <link rel="stylesheet" href="/resource/bootstrap-4.3.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/resource/fontawesome-free-5.1.0-web/css/all.css">
+    <link rel="stylesheet" href="/resource/css/common.css">
     <link rel="stylesheet" href="/resource/css/style.css">
 
     <script src="/resource/js/jquery-3.4.1.min.js"></script>

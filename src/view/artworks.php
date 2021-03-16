@@ -145,4 +145,4 @@
 <!-- /content -->
 
 <script type="module" src="resource/js/tag.js"></script>
-<script type="module" src="resource/js/artwork.js"></script>
+<script type="module" src="resource/js/artworks.js"></script>

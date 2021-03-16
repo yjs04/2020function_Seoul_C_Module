@@ -1,36 +1,29 @@
 import tag from './tag.js';
-class Artwork{
+class App{
     constructor(){
-        this.list = [];
         this.tag = null;
-        this.taging_list = [];
-        fetch("/entryTag")
-        .then(res=>res.json())
-        .then(data=>this.setting(data))
+        this.setEvent();
     }
 
-    setting(data){
-        let hash_input = $("#search_word")
-        let result_box = document.querySelector("#search_value");
-        let error_box = document.querySelector("#search_errorMsg");
-        let auto_box = document.querySelector("#search_hash_box");
+    setEvent(){
+        if(document.querySelector(".artwork_score_item")){
+            document.querySelectorAll(".artwork_score_item").forEach(x=>{x.addEventListener("click",(e)=>{
+                let val = e.target.dataset.val;
+                let html = $(e.target).html();
+                document.querySelector("#artwork_score_selected").innerHTML = html;
+                document.querySelector("#artwork_score_selected").innerHTML += `<button id="artwork_score_open"><i class="fas fa-angle-down"></i></button>`;
+                document.querySelector("#score").value = val;
+                document.querySelector("#artwork_score_selected").classList.remove("open");
+            })});
+        }
 
-        this.tag = new tag(hash_input,result_box,error_box,auto_box,data,[],this);
-        hash_input.on("propertychange change input keyup keydown",this.tag.hash_searching);
-
-        document.querySelector("#artwork_search_btn").addEventListener("click",()=>{
-            if(this.taging_list.length) location.href = "/artworks?search="+JSON.stringify(this.taging_list);
-            else return alert("검색할 해시태그를 입력해주세요.");
-        });
-        
-        let wrap = document.querySelectorAll(".gallery_img_wrap");
-        wrap.forEach(x=>{
-            x.addEventListener("click",e=>{
-                let idx = e.target.dataset.id;
-                if(idx !== "") location.href = `/artwork/${idx}`;
-            });
+        if(document.querySelector("#artwork_score_selected")) document.querySelector("#artwork_score_selected").addEventListener("click",e=>{e.target.classList.toggle("open")});
+        if(document.querySelector("#artwork_score_add_btn")) document.querySelector("#artwork_score_add_btn").addEventListener("click",e=>{
+            let work_id = e.target.dataset.work_id;
+            let worker_id = e.target.dataset.worker_id;
+            console.log(work_id,worker_id);
         });
     }
 }
 
-let app = new Artwork();
+let app = new App();

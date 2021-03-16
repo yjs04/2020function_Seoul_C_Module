@@ -96,4 +96,48 @@ class ActionController{
         go("/store","한지가 추가되었습니다.");
     }
 
+    function scoreAdd(){
+        extract($_POST);
+
+        $sql = "INSERT INTO scores(`val`,`work_id`,`giver_id`) VALUES(?,?,?)";
+
+        DB::query($sql,[$val,$work_id,user()->id]);
+
+        $sql = "SELECT SUM(val) AS score,COUNT(id) AS cnt FROM scores WHERE work_id = ?";
+        $result = DB::fetch($sql,[$work_id]);
+        $score = round(($result->sum / $result->cnt),1);
+        
+        $sql = "UPDATE works SET `score` = ? WHERE id = ?";
+        DB::query($sql,[$score,$work_id]);
+
+        $point = DB::fetch("SELECT `point` FROM users WHERE id = ?",[$worker_id]);
+        $point = $point->point + ($val * 100);
+        DB::query("UPDATE users SET `point` = ? WHERE id = ?",[$point,$worker_id]); 
+
+        echo json_encode(true);
+    }
+
+    function workDel(){
+        extract($_POST);
+        if(admin()){
+            $sql = "UPDATE works SET `status` = ?, `del_content` = ? WHERE id = ?";
+            DB::query($sql,["delete",$del_content,$id]);
+        }else{
+            $sql = "DELETE FROM `works` WHERE id = ?";
+            DB::query($sql,[$id]);
+        }
+
+        echo json_encode(true);
+    }
+
+    function workMod(){
+        checkEmpty();
+        extract($_POST);
+
+        $sql = "UPDATE works SET `work_name` = ?,`work_content` = ?,`work_tags` = ? WHERE id = ?";
+        DB::query($sql,[$work_name,$work_content,$work_tags,$id]);
+
+        echo json_encode(true);
+    }
+
 }
