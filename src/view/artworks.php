@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    <?php if(user()):?>
+    <?php if(user() && !admin()):?>
     <div class="content_wrap container">
         <div class="content_title">
             <h2 class="border-blue text-blue">등록한 작품</h2>

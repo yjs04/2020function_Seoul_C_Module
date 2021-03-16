@@ -55,6 +55,43 @@ class App{
                 document.querySelector("#mod_form").submit();
             });
         }
+
+        if(document.querySelector("#artwork_del")){
+            document.querySelector("#artwork_del").addEventListener("click",e=>{
+                let type = e.target.dataset.type;
+                let id = e.target.dataset.id;
+
+                if(type !== "admin"){
+                    if(confirm("정말로 해당 작품을 삭제하시겠습니까?")){
+                        $.ajax({
+                            url:"/workDel",
+                            method:"post",
+                            data:{id:id},
+                            success(){
+                                alert("해당 작품이 삭제되었습니다.");
+                                return location.href="/artworks";
+                            }
+                        });
+                    }
+                }else{
+                    let del_content = prompt("삭제 사유를 입력해주세요.");
+                    if(!(del_content === null || del_content === "")){
+                        $.ajax({
+                            url:"/workDel",
+                            method:"post",
+                            data:{
+                                id:id,
+                                del_content:del_content,
+                                success(){
+                                    alert("해당 작품이 삭제되었습니다.");
+                                    return location.href = "/artworks";
+                                }
+                            }
+                        })
+                    }
+                }
+            });
+        }
     }
 }
 

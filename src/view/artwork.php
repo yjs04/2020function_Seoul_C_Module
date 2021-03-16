@@ -27,7 +27,7 @@
                             <button class="artwork_btn" data-toggle="modal" data-target="#mod_popup" id="artwork_modOpen_btn">수정하기</button>
                             <?php endif;?>
                             <?php if((user() && $data['creater_id'] == user()->id) || admin()):?>
-                            <button class="artwork_btn">삭제하기</button>
+                            <button class="artwork_btn" id="artwork_del" data-type="<?=user()->type?>" data-id="<?=$data['id']?>">삭제하기</button>
                             <?php endif;?>
                         </div>
                         <span id="artwork_date"><?=$data["create_date"]?></span>
@@ -44,7 +44,7 @@
                         </div>
                         <div id="artwork_stars">
                             <span id="artwork_star"><i class="fas fa-star mr-1"></i><?=$data['score']?></span>
-                            <?php if($data['star_flag']):?>
+                            <?php if($data['star_flag'] && !admin()):?>
                             <div id="artwork_score_add">
                                 <input type="number" hidden name="score" id="score" value="5">
                                 <p id="artwork_score_selected">
