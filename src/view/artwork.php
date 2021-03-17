@@ -164,7 +164,7 @@
                                         <textarea class="form-control" name="work_content" id="work_content" cols="30" rows="10" required><?=$data["work_content"]?></textarea>
                                         <p class="form-text pl-2 text-danger"></p>
                                     </div>
-                                    <input type="text" hidden id="work_tags" name="work_tags" required value="<?=$data['work_tags']?>">
+                                    <input type="text" hidden id="work_tags" name="work_tags" required value='<?=$data['work_tags']?>'>
                                     <input type="number" hidden id="id" name="id" value="<?=$data['id']?>">
                                     <div class="form-group">
                                         <label for="mod_word" class="form-label">해시태그</label>

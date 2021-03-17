@@ -69,7 +69,21 @@ class ViewController{
     }
 
     function company(){
-        view("company");
+        $sql = 'SELECT * FROM users WHERE `type` = ? ORDER BY `company_point` DESC LIMIT 4';
+        $great_list = DB::fetchAll($sql,["company"]);
+
+        $sql = "SELECT * FROM users WHERE `type` = ?";
+        $result = DB::fetchAll($sql,["company"]);
+
+        $list = [];
+        foreach($result as $data){
+            $flag = true;
+            foreach($great_list as $great){if($data->id == $great->id) $flag = false;}
+            if($flag) $list[] = $data;
+        }
+        $list = pagination($list);
+
+        view("company",compact("great_list","list"));
     }
 
     function notice(){

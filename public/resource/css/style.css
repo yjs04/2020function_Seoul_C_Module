@@ -513,7 +513,6 @@
 
 .work_page > .content_wrap{margin: 30px auto;}
 .work_page > .content_wrap > .content_title{margin-bottom: 40px;}
-
 #all_work_area{
     display: flex;
     justify-content: space-between;
@@ -535,10 +534,11 @@
     width: 35px;
     height: 35px;
     text-align: center;
+    transition: .3s;
 }
 
+#all_work .page-link:hover{opacity: 0.7;}
 #all_work .page-link > span > i{color: #2B4585;pointer-events: none;}
-
 #all_work .page-item:first-child{margin-right: 10px;}
 #all_work .page-item:last-child{margin-left: 10px;}
 
@@ -558,7 +558,6 @@
 
 #artwork_search_btn > i {pointer-events: none;}
 #artwork_search_btn:hover{opacity: .7;}
-
 .gallery_img_box > p{
     position: absolute;
     top: 0;
@@ -620,8 +619,8 @@
     box-shadow: 10px 10px 0 #5C7192;
     border: 3px solid #657A9C;
 }
-#artwork_img_box > img{width: 100%;}
 
+#artwork_img_box > img{width: 100%;}
 #artwork_info{
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -649,7 +648,6 @@
 }
 
 #artwork_buttons{height: 24px;}
-
 .artwork_btn{
     transition: .3s;
     border: none;
@@ -660,9 +658,7 @@
 
 .artwork_btn:first-child:hover{color: #526788;}
 .artwork_btn:last-child:hover{color: #EB4F4F;}
-
 #artwork_date{font-size: 0.8em;}
-
 #all_work_header{
     padding-top: 20px;
     position: sticky;
@@ -688,14 +684,11 @@
 }
 
 #artwork_creater_img > img{width: 100%;max-height: 100%;}
-
 #artwork_creater_info{margin: 0 20px;}
-
 #artwork_creater_info > p:first-child{font-weight: bold;}
 #artwork_creater_info > p:last-child{font-weight: bold;font-size: 0.9em;color: #555;}
 #artwork_content{display: grid;grid-template-rows: 1fr auto;width: 100%;}
 #artwork_content > p{width: 100%;overflow-wrap: anywhere;}
-
 #artwork_score_selected > i{
     color: #F35A5A;
     pointer-events: none;
@@ -719,9 +712,7 @@
 }
 
 #artwork_score_open > i{transition: .3s;}
-
 #artwork_score_add{position: relative;}
-
 #artwork_score_list{
     display: inline-block;
     position: absolute;
@@ -740,7 +731,6 @@
 }
 
 #artwork_score_selected.open > #artwork_score_open > i{transform: rotate(180deg);}
-
 .artwork_score_item{
     margin: 0;
     padding: 5px 10px;
@@ -749,7 +739,6 @@
 }
 
 .artwork_score_item:hover{background-color: #eee;cursor: pointer;}
-
 .artwork_score_item > i{
     pointer-events: none;
     color: #F35A5A;
@@ -770,7 +759,6 @@
 }
 
 #artwork_star > i{color: #F35A5A;}
-
 #artwork_score_add_btn{
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -780,5 +768,79 @@
     padding: 5px 10px;
     transition: .3s;
 }
+
 #artwork_score_add_btn:hover{opacity: 0.5;}
 #artwork_stars{display: flex;justify-content:flex-end;align-items: center;}
+
+/* company */
+#great_company_list > .content_box,#company_list .content_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.company-item{
+    width: 400px;
+    border: 3px solid #F76B6B;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.company-item-img{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border: 3px solid #F76B6B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-item-img > img{max-width: 80%;max-height: 80%;}
+.company-item-info {margin: 10px 0;}
+.company-item-info > h5{font-weight: bold;}
+.company-item-info > p{
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #555;
+}
+
+.company-item-info > span{
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.best_company{
+    position: absolute;
+    right: 0;
+    bottom:1em;
+}
+
+#company_list nav{width: 100%;}
+#company_list nav > ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#company_list .page-item{width: auto;margin-top: 0;}
+#company_list .page-item.active > .page-link{background-color: #F76B6B !important; color: #fff !important;}
+#company_list .page-link{
+    border-radius: 0.1em;
+    color: #5A7091;
+    margin: 0;
+    border: none;
+    padding: 0;
+    line-height: 35px;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    transition: .3s;
+}
+
+#company_list .page-link:hover{opacity: 0.7;}
+#company_list .page-link > span > i{color: #E34646;pointer-events: none;}
+#company_list .page-item:first-child{margin-right: 10px;}
+#company_list .page-item:last-child{margin-left: 10px;}
