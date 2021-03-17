@@ -140,4 +140,70 @@ class ActionController{
         go("/artwork/$id","해당 작품이 수정되었습니다.");
     }
 
+    function noticeAdd(){
+        checkEmpty();
+        extract($_POST);
+
+        $files = $_FILES['files'];
+        $fileLength = count($files['name']);
+
+        $ff = $files['name'][0];
+        
+        $filenames = [];
+
+        if($ff){
+            for($i = 0; $i < $fileLength; $i++){
+                $fname = $files['name'][$i];
+                $tmp_name = $files['tmp_name'][$i];
+                $filename = time()."-".$fname;
+
+                $filenames[] = $filename;
+                move_uploaded_file($tmp_name,UPLOAD."/$filename");
+            }
+        }
+
+        $sql = "INSERT INTO notices(`title`,`content`,`files`,`write_date`) VALUES(?,?,?,?)";
+        DB::query($sql,[$title,$content,json_encode($filenames),date('Y-m-d H:i:s')]);
+        go("/notices","공지사항이 추가되었습니다.");
+    }
+
+    function noticeMod($id){
+        checkEmpty();
+        extract($_POST);
+
+        $flag = DB::fetch("SELECT * FROM notices WHERE id = ?",[$id]);
+        if(!$flag) back("대상을 찾을 수 없습니다.");
+
+        $files = $_FILES['files'];
+        $fileLength = count($files['name']);
+
+        $ff = $files['name'][0];
+        
+        $filenames = [];
+
+        if($ff){
+            for($i = 0; $i < $fileLength; $i++){
+                $fname = $files['name'][$i];
+                $tmp_name = $files['tmp_name'][$i];
+                $filename = time()."-".$fname;
+
+                $filenames[] = $filename;
+                move_uploaded_file($tmp_name,UPLOAD."/$filename");
+            }
+        }
+
+        $sql = 'UPDATE notices SET `title` = ?, `content` = ?, `files` = ?, WHERE id = ?';
+        DB::query($sql,[$title,$content,json_decode($filenames),$id]);
+
+        // go("/notice/$id","공지사항이 정상적으로 수정되었습니다.");
+    }
+
+    function noticeDel($id){
+        $flag = DB::fetch("SELECT * FROM notices WHERE id = ?",[$id]);
+        if(!$flag) back("대상을 찾을 수 없습니다.");
+ 
+        $sql = "DELETE FROM notices WHERE id = ?";
+        DB::query($sql,[$id]);
+        go("/notices","공지사항이 정상적으로 삭제되었습니다.");
+    }
 }

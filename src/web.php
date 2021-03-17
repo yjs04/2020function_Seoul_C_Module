@@ -10,8 +10,9 @@ Router::get("/entry","ViewController@entry","user");
 Router::get("/artworks","ViewController@artworks");
 Router::get("/artwork/{id}","ViewController@artwork");
 Router::get("/company","ViewController@company");
-Router::get("/notice","ViewController@notice");
-Router::get("/question","ViewController@question");
+Router::get("/notices","ViewController@notices","user");
+Router::get("/notice/{id}","ViewController@notice","user");
+Router::get("/question","ViewController@question","user");
 
 // guest
 Router::get("/join","ViewController@join","guest");
@@ -37,5 +38,9 @@ Router::get("/entryTag","AjaxController@entryTag");
 Router::post("/workMod","ActionController@workMod","user");
 Router::post("/workDel","ActionController@workDel","user");
 Router::post("/scoreAdd","ActionController@scoreAdd","user");
+
+Router::post("/noticeAdd","ActionController@noticeAdd","admin");
+Router::post("/noticeMod/{id}","ActionController@noticeMod","admin");
+Router::post("/noticeDel/{id}","ActionController@noticeDel","admin");
 
 Router::start();

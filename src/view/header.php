@@ -51,7 +51,7 @@
                     <li>
                         <a href="#">축제공지사항</a>
                         <ul class="sub_menu">
-                            <li><a href="/notice">알려드립니다</a></li>
+                            <li><a href="/notices">알려드립니다</a></li>
                             <li><a href="/question">1:1문의</a></li>
                         </ul>
                     </li>

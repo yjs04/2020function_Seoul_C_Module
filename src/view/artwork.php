@@ -11,9 +11,6 @@
     </div>
 
     <div class="content_wrap container">
-        <div class="content_title">
-            <h2 class="border-blue text-blue">작품 상세보기</h2>
-        </div>
         <div class="content_box" id="artwork_page">
             <div id="artwork_img_box">
                 <img src="/uploads/<?=$data["work_img"]?>" alt="artwork_img">
@@ -149,7 +146,7 @@
                     <div class="modal-dialog popup overflow-hidden">
                         <div class="modal-content rounded-0 border-0">
                             <div class="modal-header border-0">
-                                <h5 class="modal-title">상품등록</h5>
+                                <h5 class="modal-title">작품 정보 수정</h5>
                                 <button class="close" id="mod_close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">

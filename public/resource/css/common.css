@@ -550,7 +550,7 @@ header > nav > ul > li >a:hover{color: #aaa;}
 
 
 /* content */
-#content{
+div#content{
     display: flex;
     flex-wrap: wrap;
     background-color: #fff;

@@ -86,8 +86,17 @@ class ViewController{
         view("company",compact("great_list","list"));
     }
 
-    function notice(){
-        view("notice");
+    function notices(){
+        $sql = "SELECT * FROM notices ORDER BY `id` DESC";
+        $notice = DB::fetchAll($sql);
+        $notices = pagination($notice);
+        view("notices",compact("notices"));
+    }
+
+    function notice($id){
+        $sql = "SELECT * FROM notices WHERE id = ?";
+        $notice = DB::fetch($sql,[$id]);
+        view("notice",compact("notice"));
     }
 
     function question(){
