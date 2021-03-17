@@ -40,7 +40,6 @@ class ViewController{
         $best_works = DB::fetchAll($sql,[date('Y-m-d',strtotime("-7 days")),"normal"]);
 
         $sql = "SELECT * FROM works WHERE `status` = ? ORDER BY `id` DESC";
-        
         $work = DB::fetchAll($sql,["normal"]);
         $works = pagination($work);
 

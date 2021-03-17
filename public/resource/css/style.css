@@ -606,6 +606,7 @@
     flex-wrap: wrap;
     margin: 30px 0;
     margin-bottom: 50px;
+    align-items: flex-start;
 }
 
 #artwork_page > div{

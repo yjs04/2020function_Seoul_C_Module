@@ -45,8 +45,16 @@ class App{
                 let result_box = document.querySelector("#mod_value");
                 let error_box = document.querySelector("#mod_errorMsg");
                 let auto_box = document.querySelector("#mod_hash_box");
+                this.taging_list = JSON.parse(document.querySelector("#work_tags").value);
                 this.tag = new tag(mod_input,result_box,error_box,auto_box,list,[],this);
+
                 mod_input.on("propertychange change input keyup keydown",this.tag.hash_searching);
+                this.taging_list.forEach((val,id)=>{
+                    let dom = document.createElement("div");
+                    dom.innerHTML = `<span class="hash_result"># ${val}<button class="hash_result_del" data-id="${id}"><i class="fas fa-times"></i></button></span>`;
+                    dom.querySelector(".hash_result_del").addEventListener("click",this.tag.hash_del);
+                    result_box.appendChild(dom.firstChild);
+                });
             });
 
             document.querySelector("#artwork_mod_btn").addEventListener("click",e=>{

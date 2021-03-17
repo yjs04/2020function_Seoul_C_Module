@@ -156,15 +156,15 @@
                                 <form id="mod_form" method="post" action="/workMod">
                                     <div class="form-group">
                                         <label for="work_name" class="form-label">이름</label>
-                                        <input type="text" id="work_name" name="work_name" class="form-control" required>
+                                        <input type="text" id="work_name" name="work_name" class="form-control" required value="<?=$data['work_name']?>">
                                         <p class="form-text pl-2 text-danger"></p>
                                     </div>
                                     <div class="form-group">
                                         <label for="work_content" class="form-label">설명</label>
-                                        <textarea class="form-control" name="work_content" id="work_content" cols="30" rows="10" required></textarea>
+                                        <textarea class="form-control" name="work_content" id="work_content" cols="30" rows="10" required><?=$data["work_content"]?></textarea>
                                         <p class="form-text pl-2 text-danger"></p>
                                     </div>
-                                    <input type="text" hidden id="work_tags" name="work_tags" required>
+                                    <input type="text" hidden id="work_tags" name="work_tags" required value="<?=$data['work_tags']?>">
                                     <input type="number" hidden id="id" name="id" value="<?=$data['id']?>">
                                     <div class="form-group">
                                         <label for="mod_word" class="form-label">해시태그</label>

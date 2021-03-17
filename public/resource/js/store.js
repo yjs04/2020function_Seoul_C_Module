@@ -204,14 +204,7 @@ class Store{
                 sell_point:sum,
                 sell_basket:JSON.stringify(this.basketList)
             },
-            success:(data)=>{
-                this.itemList.forEach(x=>{x.num = 0;});
-                this.basketList = [];
-                this.setBasket();
-                this.setItemList(this.itemList);
-                this.user.point -= sum;
-                document.querySelector("#basket_footer > span").innerHTML = `(보유 포인트 : ${this.user.point}p)`;
-            }
+            success:(data)=>{location.reload();}
         })
     }
 

@@ -30,8 +30,9 @@ class ActionController{
         foreach($sell_basket as $basket){
             $company = DB::fetch("SELECT * FROM users WHERE id = ?",[$basket->company_id]);
             $company_point = $company->point + $basket->sum;
-            $sql = "UPDATE users SET `point` = ? WHERE id = ?";
-            DB::query($sql,[$company_point,$basket->company_id]);
+            $c_point = $company->company_point + $basket->sum;
+            $sql = "UPDATE users SET `point` = ?,`company_point` = ? WHERE id = ?";
+            DB::query($sql,[$company_point,$c_point,$basket->company_id]);
         }
 
         $point = user()->point - $sell_point;
