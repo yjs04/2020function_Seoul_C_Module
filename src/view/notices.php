@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="mod_word" class="form-label">파일</label>
-                                    <input type="file" name="files[]" multiple id="files">
+                                    <input type="file" class="form-control" name="files[]" multiple id="files">
                                     <p class="form-text pl-2 text-danger"></p>
                                 </div>
                             </form>

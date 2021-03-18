@@ -8,7 +8,11 @@ class ViewController{
     function index(){
         $sql = "SELECT * FROM works WHERE `status` = ? ORDER BY `id` DESC LIMIT 3";
         $works = DB::fetchAll($sql,["normal"]);
-        view("index",compact("works"));
+
+        $sql = "SELECT * FROM notices ORDER BY `id` DESC LIMIT 5";
+        $notices = DB::fetchAll($sql);
+
+        view("index",compact("works","notices"));
     }
 
     function overview(){

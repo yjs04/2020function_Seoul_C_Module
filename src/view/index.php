@@ -109,51 +109,35 @@
                     <h2>알려드립니다</h2>
                 </div>
                 <div class="content_box">
+                    <?php if($data["notices"] !== []):?>
                     <div id="notice_box">
                         <div id="notice_title">
-                            <h5>온라인 한지 공예대전 개최 안내</h5>
-                            <p>2020-06-30</p>
+                            <h5><?=$data["notices"][0]->title?></h5>
+                            <p><?=$data["notices"][0]->write_date?></p>
                         </div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae incidunt aliquid aut omnis? Dolores reprehenderit perspiciatis delectus asperiores aliquid, cupiditate eos ab assumenda sapiente ipsa corporis deserunt, incidunt beatae sed?</p>
-                        <button><i class="fas fa-plus"></i></button>
+                        <p><?=enc($data["notices"][0]->content)?></p>
+                        <a href="notice/<?=$data["notices"][0]->id?>"><i class="fas fa-plus"></i></a>
                         <div class="border-design bottom border-orange"></div>
                         <div class="border-design bottom border-orange notice-border"></div>
                     </div>
+                    <?php if(count($data["notices"])> 1):?>
                     <ul id="notice_list">
+                        <?php for($i = 1; $i < count($data["notices"]); $i++):?>
                         <li>
-                            <button class="notice_readmore"><i class="fas fa-angle-right"></i></button>
+                            <a href="/notice/<?=$data["notices"][$i]->id?>" class="notice_readmore"><i class="fas fa-angle-right"></i></a>
                             <div></div>
-                            <a href="#">
-                                <span class="notice_title">제26회 전국한지공예대전 입상자 발표합니다.</span>
-                                <span class="notice_day">2020-05-22</span>
+                            <a href="/notice/<?=$data["notices"][$i]->id?>">
+                                <span class="notice_title"><?=$data["notices"][$i]->title?></span>
+                                <span class="notice_day"><?=$data["notices"][$i]->write_date?></span>
                             </a>
                         </li>
-                        <li>
-                            <button class="notice_readmore"><i class="fas fa-angle-right"></i></button>
-                            <div></div>
-                            <a href="#">
-                                <span class="notice_title">제26회 전국한지공예대전 개최요강</span>
-                                <span class="notice_day">2020-03-23</span>
-                            </a>
-                        </li>
-                        <li>
-                            <button class="notice_readmore"><i class="fas fa-angle-right"></i></button>
-                            <div></div>
-                            <a href="#">
-                                <span class="notice_title">제23회 전주한지문화축제 안중걸 캐리커쳐 드로잉</span>
-                                <span class="notice_day">2019-05-15</span>
-                            </a>
-                        </li>
-                        <li>
-                            <button class="notice_readmore"><i class="fas fa-angle-right"></i></button>
-                            <div></div>
-                            <a href="#">
-                                <span class="notice_title">2019 전주한지문화축제 산업관 문화마켓 참여업체 모집공고(추가모집)</span>
-                                <span class="notice_day">2019-04-16</span>
-                            </a>
-                        </li>
+                        <?php endfor;?>
                     </ul>
-                    <button id="notice_button">알려드립니다<i class="fas fa-angle-right"></i></button>
+                    <?php endif;?>
+                    <?php else:?>
+                    <div class="w-100 p-4 text-center bc-gray">공지사항이 없습니다.</div>
+                    <?php endif;?>
+                    <a href="/notices" id="notice_button">알려드립니다<i class="fas fa-angle-right"></i></a>
                 </div>
             </div>
 
@@ -191,6 +175,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="content_wrap container" id="support">
                 <div class="content_title">
                     <h2>후원사</h2>

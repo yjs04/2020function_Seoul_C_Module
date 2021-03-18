@@ -737,7 +737,7 @@ div#content{
 }
 
 #notice_box > p{padding: 10px;padding-bottom: 20px;}
-#notice_box > button{
+#notice_box > a{
     position: absolute;
     border: none;
     width: 60px;
@@ -749,7 +749,7 @@ div#content{
     background-color: #FFA156;
 }
 
-#notice_box > button > i{
+#notice_box > a > i{
     color: #fff;
     position: absolute;
     transform: rotate(-45deg);
@@ -757,7 +757,7 @@ div#content{
     top: 35px;
 }
 
-#notice_box > button:hover{background-color: #FFBD88;}
+#notice_box > a:hover{background-color: #FFBD88;}
 
 #notice_box > .border-design.bottom{
     top: auto;
@@ -791,28 +791,31 @@ div#content{
 
 #notice_list > li:last-child{border: none;}
 
-#notice_list > li > a{
+#notice_list > li > a:last-child{
     display: flex;
     flex-direction: column;
     width: 95%;
 }
 
-#notice_list > li > a > *{z-index: 2;transition: 0.3s;}
+#notice_list > li > a:last-child > *{z-index: 2;transition: 0.3s;}
 
-#notice_list > li > a > .notice_title{
+#notice_list > li > a:last-child > .notice_title{
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-#notice_list > li > a > .notice_day{
+#notice_list > li > a:last-child > .notice_day{
     color: #555;
     font-size: 15px;
     margin-top: 5px;
 }
 
 .notice_readmore{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     border: none;
     right: -40px;
@@ -847,7 +850,7 @@ div#content{
 
 #notice_list > li:hover > div{width: 100%;}
 #notice_list > li:hover > .notice_readmore > i{color: #fff;}
-#notice_list > li:hover > a > *{color: #fff;}
+#notice_list > li:hover span{color: #fff !important;}
 
 #notice_button{
     border: none;
@@ -859,7 +862,9 @@ div#content{
     position: absolute;
     height: 60px;
     bottom: -60px;
+    line-height: 40px;
     right: 0;
+    display: block;
 }
 
 #notice_button::before,#notice_button::after{
