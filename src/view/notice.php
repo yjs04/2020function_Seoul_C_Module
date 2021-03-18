@@ -84,10 +84,11 @@
             if(confirm("해당 공지사항을 삭제하시겠습니까?")){
                 let id = e.target.dataset.id;
                 $.ajax({
-                    url:"/noticeDel"+id,
+                    url:"/noticeDel/"+id,
                     method:"post",
                     data:{},
                     success(){
+                        alert("정상적으로 삭제되었습니다.");
                         location.href = "/notices";
                     }
                 });

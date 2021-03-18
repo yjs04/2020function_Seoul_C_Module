@@ -29,7 +29,9 @@
                         <div id="basket_footer" class="bc-blue">
                             <span class="text-white pr-2">(보유 포인트 : <?=user()->point?>p)</span>
                             <p id="basket_sum" class="text-white">총 합계 <span id="basket_sum_num" class="text-white">0</span>p</p>
+                            <?php if(!admin()):?>
                             <button id="basket_btn" class="btn bc-blue text-white py-2 px-3 rounded-0 border-white">구매 완료</button>
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>

@@ -55,7 +55,9 @@
                             </div>
                         </form>
                         <div class="entry_button_box">
+                            <?php if(!admin()):?>
                             <button id="entry_button" class="border-0">출품하기</button>
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>

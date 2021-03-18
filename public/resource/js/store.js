@@ -34,7 +34,7 @@ class Store{
 
         this.tag = new tag(hash_search,hash_result_box,hash_error_box,hash_auto_box,this.tag_list,this.itemList,this);
 
-        document.querySelector("#basket_btn").addEventListener("click",()=>{this.basketSell()});
+        if(document.querySelector("#basket_btn"))document.querySelector("#basket_btn").addEventListener("click",()=>{this.basketSell()});
         hash_search.on("propertychange change input keydown keyup",this.tag.hash_searching);
         
         // goods

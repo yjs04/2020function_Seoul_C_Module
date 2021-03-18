@@ -49,13 +49,15 @@ class Entry{
         document.querySelector("#helper_prev").addEventListener("click",()=>{this.helperPage("prev");});
         document.querySelector("#helper_next").addEventListener("click",()=>{this.helperPage("next");});
 
-        document.querySelector("#entry_button").addEventListener("click",()=>{
-            this.ws.tool && this.ws.tool.unselectAll();
-            $("#image").val(this.ws.canvas.toDataURL("image/jpeg"));
-            $("#work_tags").val(JSON.stringify(this.taging_list));
-
-            $("#entry_info_form")[0].submit();
-        });
+        if(document.querySelector("#entry_button")){
+            document.querySelector("#entry_button").addEventListener("click",()=>{
+                this.ws.tool && this.ws.tool.unselectAll();
+                $("#image").val(this.ws.canvas.toDataURL("image/jpeg"));
+                $("#work_tags").val(JSON.stringify(this.taging_list));
+    
+                $("#entry_info_form")[0].submit();
+            });
+        }
 
         // canvas!!!
         $(".tool_item").on("click",e=>{
