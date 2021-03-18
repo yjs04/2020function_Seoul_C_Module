@@ -96,6 +96,8 @@ class ViewController{
     function notice($id){
         $sql = "SELECT * FROM notices WHERE id = ?";
         $notice = DB::fetch($sql,[$id]);
+        $files = json_decode($notice->files);
+
         view("notice",compact("notice"));
     }
 

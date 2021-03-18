@@ -41,6 +41,6 @@ Router::post("/scoreAdd","ActionController@scoreAdd","user");
 
 Router::post("/noticeAdd","ActionController@noticeAdd","admin");
 Router::post("/noticeMod/{id}","ActionController@noticeMod","admin");
-Router::post("/noticeDel/{id}","ActionController@noticeDel","admin");
+Router::get("/noticeDel/{id}","ActionController@noticeDel","admin");
 
 Router::start();

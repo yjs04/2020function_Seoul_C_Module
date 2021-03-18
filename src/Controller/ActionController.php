@@ -179,23 +179,28 @@ class ActionController{
 
         $ff = $files['name'][0];
         
-        $filenames = [];
+        $filenames = json_decode($filename);
 
-        if($ff){
+        if($ff && $fileLength){
+            $filenames = [];
             for($i = 0; $i < $fileLength; $i++){
                 $fname = $files['name'][$i];
                 $tmp_name = $files['tmp_name'][$i];
+                $size = $files['size'][$i];
                 $filename = time()."-".$fname;
+
+                if($size == 0 || $size > 1024 * 1024 * 10) back("파일은 10MB 이하만 업로드 가능합니다.");
+                if($i > 3) back("파일은 4개까지만 업로드 가능합니다.");
 
                 $filenames[] = $filename;
                 move_uploaded_file($tmp_name,UPLOAD."/$filename");
             }
         }
 
-        $sql = 'UPDATE notices SET `title` = ?, `content` = ?, `files` = ?, WHERE id = ?';
-        DB::query($sql,[$title,$content,json_decode($filenames),$id]);
+        $sql = 'UPDATE notices SET `title` = ?, `content` = ?, `files` = ? WHERE id = ?';
+        DB::query($sql,[$title,$content,json_encode($filenames),$id]);
 
-        // go("/notice/$id","공지사항이 정상적으로 수정되었습니다.");
+        go("/notice/$id","공지사항이 정상적으로 수정되었습니다.");
     }
 
     function noticeDel($id){
