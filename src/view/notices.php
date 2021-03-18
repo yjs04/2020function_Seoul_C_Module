@@ -93,33 +93,35 @@
 <!-- /content -->
 
 <script>
-    document.querySelector("#notice_add").addEventListener("click",()=>{
-        let title = document.querySelector("#title").value;
-        let content = document.querySelector("#notice_popup #content").value;
-        let files = $("#files")[0].files;
-        
-        if(title === "") $("#title ~ p").html("제목을 입력해주세요.");
-        else if(title.length >= 50) $("#title ~ p").html("제목은 50자 이하여야합니다.");
-        else $("#title ~ p").html("");
+    if(document.querySelector("#notice_add")){
+        document.querySelector("#notice_add").addEventListener("click",()=>{
+            let title = document.querySelector("#title").value;
+            let content = document.querySelector("#notice_popup #content").value;
+            let files = $("#files")[0].files;
+            
+            if(title === "") $("#title ~ p").html("제목을 입력해주세요.");
+            else if(title.length >= 50) $("#title ~ p").html("제목은 50자 이하여야합니다.");
+            else $("#title ~ p").html("");
 
-        if(content === "") $("#notice_popup #content ~ p").html("내용을 입력해주세요.");
-        else $("#notice_popup #content ~ p").html("");
+            if(content === "") $("#notice_popup #content ~ p").html("내용을 입력해주세요.");
+            else $("#notice_popup #content ~ p").html("");
 
-        if(files.length === 0) $("#notice_popup #files ~ p").html("파일을 입력해주세요.");
-        else if(files.length > 4) $("#notice_popup #files ~ p").html("파일은 최대 4개까지 업로드 가능합니다.");
-        else {
-            let flag = true;
-            for(let i = 0; i < files.length; i++){
-                let item = files[i];
-                if(item.size >= 1024 * 1024 * 10) flag = false;
+            if(files.length === 0) $("#notice_popup #files ~ p").html("파일을 입력해주세요.");
+            else if(files.length > 4) $("#notice_popup #files ~ p").html("파일은 최대 4개까지 업로드 가능합니다.");
+            else {
+                let flag = true;
+                for(let i = 0; i < files.length; i++){
+                    let item = files[i];
+                    if(item.size >= 1024 * 1024 * 10) flag = false;
+                }
+
+                if(flag) $("#files ~ p").html("");
+                else $("#files ~ p").html("파일은 최대 10MB 이하까지 업로드 할 수 있습니다.");
             }
 
-            if(flag) $("#files ~ p").html("");
-            else $("#files ~ p").html("파일은 최대 10MB 이하까지 업로드 할 수 있습니다.");
-        }
-
-        if($("#title ~ p").html() === "" && $("#notice_popup #content ~ p").html() === "" && $("#files ~ p").html() === "") document.querySelector("#notice_form").submit();
-    });
+            if($("#title ~ p").html() === "" && $("#notice_popup #content ~ p").html() === "" && $("#files ~ p").html() === "") document.querySelector("#notice_form").submit();
+        });
+    }
 
     document.querySelectorAll("#notice_table tbody tr").forEach(x=>{
         x.addEventListener("click",e=>{

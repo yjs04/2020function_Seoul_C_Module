@@ -76,4 +76,11 @@ class AjaxController{
         $artworks = pagination($artworks);
         echo json_encode($artworks);
     }
+
+    function loadQuestion($id){
+        $sql = "SELECT Q.*, U.user_name,U.user_email FROM users AS U, question AS Q WHERE U.id = Q.writer_id AND Q.id = ?";
+        $result = DB::fetch($sql,[$id]);
+        $result->content = enc($result->content);
+        echo json_encode($result);
+    }
 }

@@ -106,6 +106,15 @@ class ViewController{
     }
 
     function question(){
-        view("question");
+        $list = [];
+        if(admin()){
+            $sql = "SELECT * FROM question ORDER BY `id` DESC";
+            $list = DB::fetchAll($sql);
+        }else{
+            $sql = "SELECT * FROM question WHERE writer_id = ? ORDER BY `id` DESC";
+            $list = DB::fetchAll($sql,[user()->id]);
+        }
+
+        view("question",$list);
     }
 }

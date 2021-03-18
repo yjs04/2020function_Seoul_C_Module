@@ -211,4 +211,25 @@ class ActionController{
         DB::query($sql,[$id]);
         go("/notices","공지사항이 정상적으로 삭제되었습니다.");
     }
+
+    function questionAdd(){
+        checkEmpty();
+        extract($_POST);
+
+        if(strlen($question_title) > 50) back("제목은 50자 이하여야합니다!");
+        $sql = "INSERT INTO question(`writer_id`,`title`,`content`,`write_date`) VALUES(?,?,?,?)";
+        DB::query($sql,[user()->id,$question_title,$question_content,date('Y-m-d H:i:s')]);
+
+        go("/question","문의가 등록되었습니다.");
+    }
+
+    function answerAdd($id){
+        checkEmpty();
+        extract($_POST);
+
+        $sql = "UPDATE `question` SET `answer` = ?, `answer_date` = ?,`status` = ? WHERE id = ?";
+        DB::query($sql,[$answer_content,date('Y-m-d H:i:s'),"fin",$id]);
+
+        go("/question","답변이 등록되었습니다.");
+    }
 }

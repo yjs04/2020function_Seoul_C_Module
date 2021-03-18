@@ -647,13 +647,15 @@
     align-items: flex-end;
 }
 
-#artwork_buttons{height: 24px;}
+#artwork_buttons{height: 40px;}
 .artwork_btn{
     transition: .3s;
-    border: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     background-color: rgba(0, 0, 0, 0);
     font-weight: bold;
     color: #aaa;
+    padding: 5px 10px;
 }
 
 .artwork_btn:first-child:hover{color: #526788;}
@@ -879,12 +881,14 @@
 }
 
 .notice_btn{
-    border: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     background-color: rgba(0,0,0,0);
     font-weight: bold;
     font-size: 1.1em;
     color: #555;
     transition: .3s;
+    padding: 10px 20px;
 }
 
 .notice_btn:hover{opacity: 0.5;}
@@ -979,3 +983,50 @@
 }
 
 .notice_file_dl:hover{opacity: 0.5;}
+
+/* question */
+#question_buttons_box{
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#question_btn{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #555;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+#question_btn:hover{opacity: 0.5;}
+#question_list{width:100%;margin: 10px 0;}
+#question_list tbody{padding: 10px;box-shadow: 0 0 20px #ddd;border-radius: 5px; overflow: hidden;}
+#question_list tbody tr{cursor: pointer;transition: .3s;display: grid; border-bottom: 1px solid #ddd; grid-template-columns: auto 1fr auto auto;}
+#question_list tbody tr:hover{opacity: 0.5; background-color: #f5f5f5;}
+#question_list tbody tr td{padding: 15px 20px;}
+#question_list tbody tr:last-child{border: none;}
+#question_list_header{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+#question_list_header > h5{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#question_list_header > h5 > span{font-size: 0.7em;}
+#question_list_header > p{font-size: 0.9em;}
+.question_answer_btn{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#question_list_footer{background-color: #f5f5f5;}

@@ -33,7 +33,7 @@
                     <?php foreach(json_decode($data["notice"]->files) as $item):?>
                     <div class="notice_file">
                         <p><?=$item?><span class="ml-1">[<?= filesize(UPLOAD."/$item") / 1024 < 1 ? filesize(UPLOAD."/$item")."byte" : filesize(UPLOAD."/$item") / 1024 / 1024 < 1 ? round((filesize(UPLOAD."/$item") / 1024),1)."KB" : round((filesize(UPLOAD."/$item") / 1024 / 1024),1)."MB" ?>]</span></p>
-                        <a href="/uploads/<?=$item?>" class="notice_file_dl">다운로드</a>
+                        <a href="/uploads/<?=$item?>" class="notice_file_dl" download>다운로드</a>
                     </div>
                     <?php endforeach;?>
                 </div>
@@ -79,14 +79,25 @@
 <!-- /content -->
 
 <script>
-    document.querySelector("#notice_del_btn").addEventListener("click",e=>{
-        if(confirm("해당 공지사항을 삭제하시겠습니까?")){
-            let id = e.target.dataset.id;
-            location.href="/noticeDel/"+id;
-        }
-    });
+    if(document.querySelector("#notice_del_btn")){
+        document.querySelector("#notice_del_btn").addEventListener("click",e=>{
+            if(confirm("해당 공지사항을 삭제하시겠습니까?")){
+                let id = e.target.dataset.id;
+                $.ajax({
+                    url:"/noticeDel"+id,
+                    method:"post",
+                    data:{},
+                    success(){
+                        location.href = "/notices";
+                    }
+                });
+            }
+        });
+    }
 
-    document.querySelector("#notice_add").addEventListener("click",e=>{
-        document.querySelector("#mod_form").submit();
-    });
+    if(document.querySelector("#notice_add")){
+        document.querySelector("#notice_add").addEventListener("click",e=>{
+            document.querySelector("#mod_form").submit();
+        });
+    }
 </script>
